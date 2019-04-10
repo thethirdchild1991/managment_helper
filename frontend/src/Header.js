@@ -8,8 +8,10 @@ class Header extends Component{
 
     render(){
         return (
-            <header>
-                <p>Header!</p>
+            <header className = 'App-header'>
+                <a href="#">
+                    <img src="http://ardeonova.com/sites/all/themes/riftek/logo.png" alt="logo"/>
+                </a>
             </header>        
         );
     }    
