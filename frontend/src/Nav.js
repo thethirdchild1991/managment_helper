@@ -20,7 +20,7 @@ class Nav extends Component{
 
     render(){
         return (
-            <nav>
+            <nav id="nav">
                 <ul>
                     {navElements}
                 </ul>
