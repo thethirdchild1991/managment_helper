@@ -1,5 +1,9 @@
 import React from 'react'
 import {Component} from 'react'
+import MainLogo from './MainLogo'
+import LogInForm from './LogInForm'
+
+
 
 class Header extends Component{
     constructor( props ){
@@ -8,10 +12,9 @@ class Header extends Component{
 
     render(){
         return (
-            <header className = 'App-header'>
-                <a href="#">
-                    <img src="http://ardeonova.com/sites/all/themes/riftek/logo.png" alt="logo"/>
-                </a>
+            <header className = 'header'>
+                <MainLogo />
+                <LogInForm />                
             </header>        
         );
     }    
