@@ -20,7 +20,7 @@ const port = 5000;
 class Project {
     constructor(){
         this.props = {};
-        this.props.agent = 'agent';
+        this.props.agent = 'контрагент';
         this.props.client = 'Заказчик';
         this.props.project = 'Проект';
         this.props.technology = 'Технологии';

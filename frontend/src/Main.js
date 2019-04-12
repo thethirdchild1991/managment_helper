@@ -1,5 +1,6 @@
 import React, {Component} from 'react'
 import {guestContent} from './guestContentSettings'
+import ProjectElem from './ProjectElem'
 
 // const APIAddr = 'https://swapi.co/api/people/1'
 const APIAddr = 'http://localhost:5000'
@@ -14,15 +15,12 @@ class Main extends Component{
     }
 
     contentOnState(){
-        return this.state.inited === true ?                                         
-                    this.state.data.map( elem => {
-                        console.log(elem.props);
-                        return (
-                            <li>
-                                {elem.props.agent}
-                            </li>
-                        )}
-                    ) : 
+        return  this.state.inited === true ?                                         
+                    this.state.data.map( elem => {                        
+                        return (                            
+                                <ProjectElem mdata={elem.props} />                            
+                        );
+                    }) : 
                     guestContent.map( elem => {
                         return (
                         <li>
