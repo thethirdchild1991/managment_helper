@@ -11,8 +11,8 @@ const footerSocNetworksElements = footerSocNetworksData.map( value => {
         )
 })
 class Footer extends Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
     }
     render () {
         return(

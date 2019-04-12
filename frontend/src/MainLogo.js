@@ -1,8 +1,8 @@
 import React, {Component} from 'react'
 
 class MainLogo extends Component{
-    constructor( props ){
-        super( props );
+    constructor(  ){
+        super(  );
     }
     render() {
         return (

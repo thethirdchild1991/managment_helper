@@ -6,8 +6,8 @@ import LogInForm from './LogInForm'
 
 
 class Header extends Component{
-    constructor( props ){
-        super( props )
+    constructor(){
+        super()
     }
 
     render(){
