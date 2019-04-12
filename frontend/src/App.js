@@ -14,8 +14,7 @@ class App extends Component {
         <Nav />
         <Main />  
         <Footer />           
-      </>
-      
+      </>      
     );
   }
 }

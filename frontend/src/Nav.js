@@ -14,8 +14,8 @@ const navElements = navData.map(
 );
 
 class Nav extends Component{
-    constructor(props){
-        super(props);
+    constructor(){
+        super();
     }
 
     render(){
