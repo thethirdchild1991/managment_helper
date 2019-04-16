@@ -22,7 +22,7 @@ class Main extends Component{
                     //             // <ProjectElem mdata={elem.props} />                            
                     //             <ProjectsView data = {elem.props} />
                     //     );
-                    // }) : 
+                    // }) :                     
                     <ProjectsView data = {this.state.data}/>
                     :
                     guestContent.map( elem => {
@@ -41,6 +41,7 @@ class Main extends Component{
                     // data => console.log(data)
                     (res) => {                        
                         this.setState({inited:true, data:res});
+                        // console.log(this.state.data);
                     },                
                     (error) => { console.log('error')}
             );

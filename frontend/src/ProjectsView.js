@@ -8,15 +8,21 @@ class ProjectsView extends Component{
 
     render(){        
         return  <table className="projectTable">
-                    {
-                        Object.entries(this.props.data[0].props).map( pair => {                    
+                    { 
+                        Object.entries(this.props.data[2]).map( pair => {                    
                             const [key, value] = pair;
                             return <th>{key}</th>;
-                        })
+                        }) 
                     }
-                    {this.props.data.map( elem => {
-                        return <ProjectElem data={elem.props}/>
-                    })}
+                    
+                    
+                    
+                    { 
+                        this.props.data.map( elem => {
+                            return <ProjectElem data={elem}/>
+                        }) 
+                    }
+                    
                 </table>
     }
 }

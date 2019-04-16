@@ -14,9 +14,10 @@
 
 const express = require('express');
 const cors = require('cors');
-const mongoose = require('mongoose');
 const app = express();
 const port = 5000;
+const ProjectModel = require('./db')
+
 
 class Project {
     constructor(){
@@ -30,36 +31,27 @@ class Project {
         this.props.project_engineer = 'Проектный инженер';
     }
 };
-const test = new Project();
 
 const DefaultProjectsList = [];
 for( let i = 0; i < 3; i++ ){
     DefaultProjectsList.push( new Project() );
 }
 
-console.log(DefaultProjectsList);
 
-
-// const userSchema = mongoose.Schema({
-//     username: { type: String, required: true, unique: true },
-//     password: { type: String, required: true },
-//     createdAt: { type: Date, default: Date.now },
-//     displayName: String,
-//     bio: String
-//     });
-
-    
-// mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
-
-// const Cat = mongoose.model('Cat', { name: String });
-
-// const kitty = new Cat({ name: 'Zildjian' });
-// kitty.save().then(() => console.log('meow'));
 
 app.use(cors())
 app.get('/', (req, res) => {
     console.log("puts")
-    res.json( DefaultProjectsList )
+    // res.json( DefaultProjectsList )
     // res.send('Hello World!')
+    ProjectModel.find().lean().exec(function(err,docs){
+        if(err){
+            console.log(err)
+        }else{
+            // console.log((JSON.stringify(docs)))
+            res.json(docs)
+            // return res.end(JSON.stringify(docs));
+        }
+    });
 })
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
