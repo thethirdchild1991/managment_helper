@@ -117,8 +117,16 @@ li {
   padding: 0 10px;
 }
 main {
+  display: flex;
   flex-grow: 1;
+  flex-direction: row;
+  justify-content: center;  
   background: #331E4D;
+}
+
+.projectTable{
+  color: white;
+  background-color: green;
 }
 
 footer {

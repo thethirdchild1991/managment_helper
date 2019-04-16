@@ -1,6 +1,7 @@
 import React, {Component} from 'react'
 import {guestContent} from './guestContentSettings'
 import ProjectElem from './ProjectElem'
+import ProjectsView from './ProjectsView';
 
 // const APIAddr = 'https://swapi.co/api/people/1'
 const APIAddr = 'http://localhost:5000'
@@ -16,11 +17,14 @@ class Main extends Component{
 
     contentOnState(){
         return  this.state.inited === true ?                                         
-                    this.state.data.map( elem => {                        
-                        return (                            
-                                <ProjectElem mdata={elem.props} />                            
-                        );
-                    }) : 
+                    // this.state.data.map( elem => {                        
+                    //     return (                            
+                    //             // <ProjectElem mdata={elem.props} />                            
+                    //             <ProjectsView data = {elem.props} />
+                    //     );
+                    // }) : 
+                    <ProjectsView data = {this.state.data}/>
+                    :
                     guestContent.map( elem => {
                         return (
                         <li>

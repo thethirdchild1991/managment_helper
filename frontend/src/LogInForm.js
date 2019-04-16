@@ -5,13 +5,18 @@ class LogInForm extends Component{
         super(props);
     }
 
+    submitHandle = event => {
+        event.preventDefault();
+        console.log('form Submited')
+    }
+
     render(){
         return (
             <div id="logInForm">
-                <form>
+                <form onSubmit={this.submitHandle}>
                     <input type="text" value="username" required/> <br />
                     <input type="password" required/> <br />
-                    <input type="submit" value="login" className="button" />
+                    <input type="submit" value="login" className="button"/>
                 </form>
             </div>
 

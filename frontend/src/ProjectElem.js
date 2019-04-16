@@ -6,14 +6,20 @@ class ProjectElem extends Component{
     }
 
     render(){
+        // console.log(this.props.data)        
+        
         return (
-            <ul>
+            
+            <tr>
                 {
-                    Object.entries(this.props.mdata).map( pair => {                    
-                        return ( pair[1] );
+                    Object.entries(this.props.data).map( pair => {                    
+                        const [key, value] = pair;
+                        
+                        // return (`${key} : ${value}`);
+                        return <td>{value}</td>;
                     })
                 }
-            </ul>
+            </tr>
         );
         
     }

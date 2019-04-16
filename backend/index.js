@@ -40,21 +40,21 @@ for( let i = 0; i < 3; i++ ){
 console.log(DefaultProjectsList);
 
 
-const userSchema = mongoose.Schema({
-    username: { type: String, required: true, unique: true },
-    password: { type: String, required: true },
-    createdAt: { type: Date, default: Date.now },
-    displayName: String,
-    bio: String
-    });
+// const userSchema = mongoose.Schema({
+//     username: { type: String, required: true, unique: true },
+//     password: { type: String, required: true },
+//     createdAt: { type: Date, default: Date.now },
+//     displayName: String,
+//     bio: String
+//     });
 
     
-mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
+// mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
 
-const Cat = mongoose.model('Cat', { name: String });
+// const Cat = mongoose.model('Cat', { name: String });
 
-const kitty = new Cat({ name: 'Zildjian' });
-kitty.save().then(() => console.log('meow'));
+// const kitty = new Cat({ name: 'Zildjian' });
+// kitty.save().then(() => console.log('meow'));
 
 app.use(cors())
 app.get('/', (req, res) => {
