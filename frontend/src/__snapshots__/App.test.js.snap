@@ -1,0 +1,35 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`App has a valid snapshot 1`] = `
+<footer
+  id="footer"
+>
+  <a
+    href="http://youtube.com"
+    target="blank"
+  >
+    <img
+      alt="youtube"
+      src="http://ardeonova.com/sites/all/themes/riftek/img/videos.png"
+    />
+  </a>
+  <a
+    href="http://facebook.com"
+    target="blank"
+  >
+    <img
+      alt="facebook"
+      src="http://ardeonova.com/sites/all/themes/riftek/img/logotype42.png"
+    />
+  </a>
+  <a
+    href="http://linkedin.com"
+    target="blank"
+  >
+    <img
+      alt="linkedin"
+      src="http://ardeonova.com/sites/all/themes/riftek/img/socialnetwork168.png"
+    />
+  </a>
+</footer>
+`;
