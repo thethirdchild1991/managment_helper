@@ -12,6 +12,8 @@ Features:
 		-admin view
 	-task view
 	-storage view
+	-project registration form
+	-project editing form
 
 Guest view:
 	company logo, datetime, some Hello words. Log in form.
@@ -40,11 +42,14 @@ developer
 add task to developer
 
 project
+create project
+edit project
 add task to project
 add any docs
 
 task
 create task, change status, add any docs, datettime for start/stop
+
 
 
 
