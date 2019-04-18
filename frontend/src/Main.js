@@ -1,7 +1,9 @@
 import React, {Component} from 'react'
 import {guestContent} from './guestContentSettings'
 import ProjectElem from './ProjectElem'
-import ProjectsView from './ProjectsView';
+import ProjectsView from './ProjectsView'
+import ProjectForm from './ProjectForm'
+import ProjectFormConfig from './ProjectFormConfig'
 
 // const APIAddr = 'https://swapi.co/api/people/1'
 const APIAddr = 'http://localhost:5000'
@@ -50,7 +52,10 @@ class Main extends Component{
     render(){
         return (
             <main id="main">
-                {this.contentOnState()}
+                {/* {this.contentOnState()} */}
+                <ProjectForm 
+                            proto={ProjectFormConfig} 
+                            submitText="Save Project" />
             </main>
         );
     }    
