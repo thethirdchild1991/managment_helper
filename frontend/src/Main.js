@@ -6,7 +6,7 @@ import ProjectForm from './ProjectForm'
 import ProjectFormConfig from './ProjectFormConfig'
 
 // const APIAddr = 'https://swapi.co/api/people/1'
-const APIAddr = 'http://localhost:5000'
+import  {APIAddr} from './APISettings'
 
 class Main extends Component{
     constructor(props){

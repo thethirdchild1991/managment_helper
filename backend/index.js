@@ -1,23 +1,11 @@
-// const express = require('express')
-// const app = express()
+const express       = require('express');
+const cors          = require('cors');
+const bodyParser    = require("body-parser");
+const ProjectModel  = require('./db')
 
-
-// app.set('json spaces', 40);
-
-// app.get('/', (req, res) => {
-//     console.log("puts")
-//     res.json( { responce : 'test'} )
-//     // res.send('Hello World!')
-// })
-
-// app.listen(port, () => console.log(`Example app listening on port ${port}!`))
-
-const express = require('express');
-const cors = require('cors');
+//-------------------------------------------
 const app = express();
 const port = 5000;
-const ProjectModel = require('./db')
-
 
 class Project {
     constructor(){
@@ -40,6 +28,9 @@ for( let i = 0; i < 3; i++ ){
 
 
 app.use(cors())
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+
 app.get('/', (req, res) => {
     console.log("puts")
     // res.json( DefaultProjectsList )
@@ -54,4 +45,20 @@ app.get('/', (req, res) => {
         }
     });
 })
+
+app.post('/',function(req,res){
+    console.log(req.body);
+    res.end("yes");
+  });
+
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
+
+
+
+
+
+
+
+
+
+

@@ -4,12 +4,18 @@ class LabeledInput extends Component{
         super(props);    
     }
 
-    render() {
+    render() {        
         return(
             <div>
                 <label for={this.props.id}>{this.props.text}</label>            
                 {this.props.BR === true ? <br /> : ''}
-                <input type="text" id={this.props.id} value={this.props.text}/>
+                <input 
+                    type="text" 
+                    id={this.props.id} 
+                    name={this.props.id}
+                    defaultValue={this.props.text}
+                    required={this.props.required} />
+                
             </div>
         );
     }
