@@ -3,7 +3,7 @@ import Header from './Header'
 import Footer from './Footer';
 import Nav from './Nav'
 import Main from "./Main";
-import './App.css';
+import '../App.css';
 
 
 class App extends Component {
@@ -19,3 +19,7 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+

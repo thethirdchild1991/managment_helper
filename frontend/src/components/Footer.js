@@ -1,6 +1,6 @@
 import React from 'react'
 import {Component} from 'react'
-import {footerSocNetworksData} from './socNetSettings'
+import {footerSocNetworksData} from '../configs/socNetSettings'
 
 
 const footerSocNetworksElements = footerSocNetworksData.map( value => {

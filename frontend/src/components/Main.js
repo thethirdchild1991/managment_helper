@@ -1,15 +1,13 @@
 import React, {Component} from 'react'
-import {guestContent} from './guestContentSettings'
+import {guestContent} from '../configs/guestContentSettings'
 import ProjectElem from './ProjectElem'
 import ProjectsView from './ProjectsView'
-import ProjectFormConfig from './configs/ProjectFormConfig'
-import SignInFormConfig from './configs/SignInFormConfig'
-import SignUpFormConfig from './configs/SignUpFormConfig'
-import CreateDeveloperFormConfig from './configs/CreateDeveloperFormConfig'
+import ProjectFormConfig from '../configs/ProjectFormConfig'
+import SignInFormConfig from '../configs/SignInFormConfig'
+import SignUpFormConfig from '../configs/SignUpFormConfig'
+import CreateDeveloperFormConfig from '../configs/CreateDeveloperFormConfig'
 import AppForm from './AppForm'
-
-// const APIAddr = 'https://swapi.co/api/people/1'
-import {API} from './configs/APISettings'
+import {API} from '../configs/APISettings'
 
 class Main extends Component{
     constructor(props){

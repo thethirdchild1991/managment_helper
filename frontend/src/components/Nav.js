@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {navData} from './navSettings';
+import {navData} from '../configs/navSettings';
 
 const navElements = navData.map(
     val => {
