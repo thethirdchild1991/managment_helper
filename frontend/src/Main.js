@@ -5,10 +5,11 @@ import ProjectsView from './ProjectsView'
 import ProjectFormConfig from './configs/ProjectFormConfig'
 import SignInFormConfig from './configs/SignInFormConfig'
 import SignUpFormConfig from './configs/SignUpFormConfig'
+import CreateDeveloperFormConfig from './configs/CreateDeveloperFormConfig'
 import AppForm from './AppForm'
 
 // const APIAddr = 'https://swapi.co/api/people/1'
-import {APIAddr} from './APISettings'
+import {API} from './configs/APISettings'
 
 class Main extends Component{
     constructor(props){
@@ -39,7 +40,7 @@ class Main extends Component{
     }
 
     componentDidMount(){
-        fetch(APIAddr)
+        fetch(API.addr)
             .then(res => res.json())
             .then(
                     // data => console.log(data)
@@ -57,19 +58,25 @@ class Main extends Component{
                 {/* {this.contentOnState()} */}
                 <AppForm
                     id='ProjectForm'
-                    url={APIAddr}
+                    url={API.createProject}
                     proto={ProjectFormConfig} 
                     submitText="Save Project" />
                 <AppForm
                     id='SignInForm'
-                    url={APIAddr}
+                    url={API.singIn}
                     proto={SignInFormConfig} 
                     submitText="SignIn" />  
                 <AppForm
                     id='SignUpForm'
-                    url={APIAddr}
+                    url={API.singUp}
                     proto={SignUpFormConfig} 
-                    submitText="SignUp" />                            
+                    submitText="SignUp" />   
+                <AppForm
+                    id='CreateDeveloper'                         
+                    url={API.createDeveloper}
+                    proto={CreateDeveloperFormConfig}
+                    submitText="Create" />
+
 
             </main>
         );

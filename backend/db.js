@@ -13,9 +13,17 @@ const ProjectSchema = new Schema({
     project_engineer    : {type: String, default: 'project_engineer'},// = 'Проектный инженер',
 });
 
+const UserSchema = new Schema({
+    username    : {type: String, default: 'username'},
+    email       : {type: String, default: 'email'},
+    password    : {type: String, default: 'password'},
+    role        : {type: String, default: 'employee'}    
+});
 
 
-const Project = mongoose.model('Project', ProjectSchema);
+
+const ProjectModel = mongoose.model('Project', ProjectSchema);
+const UserModel = mongoose.model('User', UserSchema);
 // const TestProject_1 = new Project({ project : 'TestProject_1'});
 // TestProject_1.save();
 
@@ -27,5 +35,6 @@ const Project = mongoose.model('Project', ProjectSchema);
 //         // return res.end(JSON.stringify(docs));
 //     }
 // });
-module.exports =  Project;
+module.exports.ProjectModel =  ProjectModel;
+module.exports.UserModel =  UserModel;
 

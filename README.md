@@ -2,6 +2,13 @@
 
 Tool for task control.
 
+Pages:
+	SignIn/SignUp page
+	main view page accordinly to user role with log out button
+	user page for admin
+	project page for envolved users
+	user profile for user
+
 
 Features:
 	-guest view

@@ -1,4 +1,10 @@
 import React, {Component} from 'react'
+/*
+id
+text
+BR
+required
+*/
 class LabeledInput extends Component{
     constructor(props){
         super(props);    
@@ -7,7 +13,7 @@ class LabeledInput extends Component{
     render() {        
         return(
             <div>
-                <label for={this.props.params.id}>{this.props.params.text}</label>            
+                <label htmlFor={this.props.params.id}>{this.props.params.text}</label>            
                 {this.props.params.BR === true ? <br /> : ''}
                 <input 
                     type="text" 

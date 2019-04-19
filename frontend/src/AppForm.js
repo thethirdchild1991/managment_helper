@@ -22,7 +22,8 @@ class AppForm extends Component{
 
     submitHandle = event => {
         event.preventDefault();
-        console.log('Hello from '+event.target.id)
+        console.log('Hello from '+event.target.id+' to '+this._url)
+        
         fetch(
             this._url,
             {
@@ -39,7 +40,7 @@ class AppForm extends Component{
                 {
                     this.props.proto ?
                         this.props.proto.map( element => {
-                            return <LabeledInput params={element} />
+                            return <LabeledInput key={element.id} params={element} />
                         })
                     :
                         ''
