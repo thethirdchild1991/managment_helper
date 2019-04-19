@@ -8,18 +8,26 @@ class Auth extends Component{
     render(){
         return(
         <main id='main'>
+            <div className='authWrapper'>
+                <div className='authTypeSelector'>
+                    <div>SignIn</div>
+                    <div>SignUp</div>
+                </div>
             <AppForm 
-                id='SignIn'
+                id='signIn'
                 proto={SignInFormConfig}
                 submitText='SignIn'
                 url={API.singIn}
-            />       
+            />   
+                
             <AppForm 
-                id='SignUp'
+                id='signUp'
                 proto={SignUpFormConfig}
                 submitText='SignUp'
                 url={API.singUp}
             /> 
+            </div>
+            
         </main>
         )        
     }

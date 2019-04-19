@@ -43,7 +43,7 @@ class AppForm extends Component{
 
     render() {
         return (
-            <div className='appForm'>
+            <div className={this.props.id} >
                 <form id={this.props.id} onChange={this.changeHandle} onSubmit={this.submitHandle}>
                     {
                         this.props.proto ?
@@ -55,7 +55,7 @@ class AppForm extends Component{
                     }
                     {
                         this.props.submitText ? 
-                            <input type="submit" value={this.props.submitText} />
+                            <input type="submit" value={this.props.submitText} class='submitButton'/>
                         :
                             ''
                     }

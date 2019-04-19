@@ -124,6 +124,51 @@ main {
   background: #331E4D;
 }
 
+.authWrapper{
+  display: flex;
+  flex-direction: column;
+  height: max-content;
+}
+
+.authTypeSelector{
+  display: flex;
+  flex-direction: row;
+  background-color: blue;
+}
+.authTypeSelector div{
+  display: flex;
+  flex-grow: 1;
+  justify-content: center;  
+}
+
+.signIn, .signUp{
+  height: max-content;
+  padding: 0 10px;
+}
+#signIn div, #signUp div{
+  display: flex;
+  flex-direction: column;
+  padding: 10px 0;
+}
+
+#signIn .submitButton, #signUp .submitButton{
+  background-color: aquamarine;
+}
+
+.submitButton{
+  line-height: 4;
+  width: 100%;
+  margin: 10px 0;
+}
+
+.signUp{
+  background-color: brown;
+  
+}
+.signIn{
+  background-color: tomato;
+}
+
 .projectTable{
   color: white;
   background-color: green;
