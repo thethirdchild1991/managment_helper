@@ -1,6 +1,13 @@
 import React, {Component} from 'react'
 import LabeledInput from './LabeledInput'
 
+/*
+id
+proto
+submitText
+url
+*/
+
 class AppForm extends Component{
     constructor(props){
         super(props)
@@ -36,22 +43,24 @@ class AppForm extends Component{
 
     render() {
         return (
-            <form id={this.props.id} onChange={this.changeHandle} onSubmit={this.submitHandle}>
-                {
-                    this.props.proto ?
-                        this.props.proto.map( element => {
-                            return <LabeledInput key={element.id} params={element} />
-                        })
-                    :
-                        ''
-                }
-                {
-                    this.props.submitText ? 
-                        <input type="submit" value={this.props.submitText} />
-                    :
-                        ''
-                }
-            </form>
+            <div className='appForm'>
+                <form id={this.props.id} onChange={this.changeHandle} onSubmit={this.submitHandle}>
+                    {
+                        this.props.proto ?
+                            this.props.proto.map( element => {
+                                return <LabeledInput key={element.id} params={element} />
+                            })
+                        :
+                            ''
+                    }
+                    {
+                        this.props.submitText ? 
+                            <input type="submit" value={this.props.submitText} />
+                        :
+                            ''
+                    }
+                </form>
+            </div>
         );
     }
 
