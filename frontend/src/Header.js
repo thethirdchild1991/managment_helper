@@ -1,10 +1,6 @@
 import React from 'react'
 import {Component} from 'react'
 import MainLogo from './MainLogo'
-import SignInForm from './SignInForm'
-import SignUpForm from './SignUpForm'
-
-
 
 class Header extends Component{
     constructor(){
@@ -15,8 +11,6 @@ class Header extends Component{
         return (
             <header className = 'header'>
                 <MainLogo />
-                <SignInForm />      
-                <SignUpForm />          
             </header>        
         );
     }    

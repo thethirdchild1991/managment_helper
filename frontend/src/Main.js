@@ -2,11 +2,13 @@ import React, {Component} from 'react'
 import {guestContent} from './guestContentSettings'
 import ProjectElem from './ProjectElem'
 import ProjectsView from './ProjectsView'
-import ProjectForm from './ProjectForm'
-import ProjectFormConfig from './ProjectFormConfig'
+import ProjectFormConfig from './configs/ProjectFormConfig'
+import SignInFormConfig from './configs/SignInFormConfig'
+import SignUpFormConfig from './configs/SignUpFormConfig'
+import AppForm from './AppForm'
 
 // const APIAddr = 'https://swapi.co/api/people/1'
-import  {APIAddr} from './APISettings'
+import {APIAddr} from './APISettings'
 
 class Main extends Component{
     constructor(props){
@@ -53,9 +55,22 @@ class Main extends Component{
         return (
             <main id="main">
                 {/* {this.contentOnState()} */}
-                <ProjectForm 
-                            proto={ProjectFormConfig} 
-                            submitText="Save Project" />
+                <AppForm
+                    id='ProjectForm'
+                    url={APIAddr}
+                    proto={ProjectFormConfig} 
+                    submitText="Save Project" />
+                <AppForm
+                    id='SignInForm'
+                    url={APIAddr}
+                    proto={SignInFormConfig} 
+                    submitText="SignIn" />  
+                <AppForm
+                    id='SignUpForm'
+                    url={APIAddr}
+                    proto={SignUpFormConfig} 
+                    submitText="SignUp" />                            
+
             </main>
         );
     }    
