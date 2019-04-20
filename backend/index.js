@@ -48,8 +48,21 @@ app.get('/selectAllProjects', (req, res) => {
 
 app.post('/signin',function(req,res){
     console.log('signIn:', req.body);
+    Models.UserModel.count({username: req.body.username}, (err,count) =>{
+        console.log(`found : ${count}`)
+        let loggedIn = false;
+        if( count === 1){
+            loggedIn = true   
+        }
+        res.json({ 'loggedIn' :  loggedIn })
+    })
 
-    res.end("yes");
+    // Models.UserModel.find({username : req.body.username}).lean().exec(
+    //     (err,docs) => {
+    //         console.log(docs)
+    // })
+
+    // res.json({ loggedIn: true })
 });
 
 app.post('/singup',function(req,res){

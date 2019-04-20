@@ -13,11 +13,15 @@ class AppForm extends Component{
         super(props)
         
         this._url = props.url
-        this.state = {            
+        this.authHandler = props.authHandler
+        this.state = {
+            loggedIn : false
         }
         this.props.proto.forEach( elem => {
             this.state[elem.id] = elem.text           
         })
+        // console.log('props: ',props)
+        // this.authHandler(true)
     }
 
     changeHandle = event => {
@@ -38,12 +42,19 @@ class AppForm extends Component{
                 headers: { 'Accept': 'application/json','Content-Type': 'application/json',},
                 body:  JSON.stringify(this.state)
             }
-        )
+        ).then( res => res.json())
+        .then( res =>{
+            console.log('fetched : ', res.loggedIn)
+            this.setState({loggedIn: res.loggedIn})
+            if(this.authHandler)
+                this.authHandler(res.loggedIn)
+        })
     }
 
     render() {
+        
         return (
-            <div className={this.props.id} >
+            <div className={this.props.mainClassName+' '+this.props.additionalClassName}  >
                 <form id={this.props.id} onChange={this.changeHandle} onSubmit={this.submitHandle}>
                     {
                         this.props.proto ?

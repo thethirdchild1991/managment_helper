@@ -141,6 +141,14 @@ main {
   justify-content: center;  
 }
 
+.authTypeSelector .active{
+  background-color: green;
+}
+
+.authTypeSelector .notActive{
+  background-color: red;
+}
+
 .signIn, .signUp{
   height: max-content;
   padding: 0 10px;
@@ -167,6 +175,10 @@ main {
 }
 .signIn{
   background-color: tomato;
+}
+
+.hidden{
+  display: none;
 }
 
 .projectTable{
