@@ -13,7 +13,7 @@ class AppForm extends Component{
         super(props)
         
         this._url = props.url
-        this.authHandler = props.authHandler
+        this.extSubmitHandler=props.submitHandler
         this.state = {
             loggedIn : false
         }
@@ -44,10 +44,11 @@ class AppForm extends Component{
             }
         ).then( res => res.json())
         .then( res =>{
-            console.log('fetched : ', res.loggedIn)
-            this.setState({loggedIn: res.loggedIn})
-            if(this.authHandler)
-                this.authHandler(res.loggedIn)
+            // console.log('fetched : ', res.loggedIn)
+            // this.setState({loggedIn: res.loggedIn})
+            // if(this.authHandler)
+            //     this.authHandler(res.loggedIn)
+            this.extSubmitHandler(Boolean(res.loggedIn))
         })
     }
 

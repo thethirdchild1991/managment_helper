@@ -1,4 +1,12 @@
 import React, {Component} from 'react'
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect,
+    withRouter
+  } from "react-router-dom";
+
 import {guestContent} from '../configs/guestContentSettings'
 import ProjectElem from './ProjectElem'
 import ProjectsView from './ProjectsView'
@@ -12,7 +20,10 @@ import {API} from '../configs/APISettings'
 class Main extends Component{
     constructor(props){
         super(props);
+        console.log('From main constructor')
+        const authState = Boolean(localStorage.getItem('loggedIn'))
         this.state = {
+            authState: authState,
             inited : false,
             data : [],
         };
@@ -38,6 +49,7 @@ class Main extends Component{
     }
 
     componentDidMount(){
+        console.log('Main Did mount')
         fetch(API.addr)
             .then(res => res.json())
             .then(
@@ -49,8 +61,19 @@ class Main extends Component{
                     (error) => { console.log('error')}
             );
     }
+    componentWillMount(){
+        console.log('Main will mount')
+    }
+
+    componentWillUpdate(){
+        console.log('Main will update')
+    }
 
     render(){
+        console.log('From Main render', this.state.authState)
+        if(this.state.authState !== true){
+            return <Redirect push to='/auth' />
+        }
         return (
             <main id="main">
                 {/* {this.contentOnState()} */}
@@ -58,17 +81,7 @@ class Main extends Component{
                     id='ProjectForm'
                     url={API.createProject}
                     proto={ProjectFormConfig} 
-                    submitText="Save Project" />
-                <AppForm
-                    id='SignInForm'
-                    url={API.singIn}
-                    proto={SignInFormConfig} 
-                    submitText="SignIn" />  
-                <AppForm
-                    id='SignUpForm'
-                    url={API.singUp}
-                    proto={SignUpFormConfig} 
-                    submitText="SignUp" />   
+                    submitText="Save Project" />                 
                 <AppForm
                     id='CreateDeveloper'                         
                     url={API.createDeveloper}

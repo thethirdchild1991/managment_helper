@@ -109,9 +109,15 @@ header{
   background: #592E83;
   padding: 10px 0;
 }
-nav{
+nav {
   background-color: blueviolet;
+  color: white;
 }
+
+nav a{
+  color: white;
+}
+
 li {
   display: block;
   padding: 0 10px;

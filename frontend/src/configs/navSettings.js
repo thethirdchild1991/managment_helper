@@ -7,4 +7,8 @@ export const navData = [
         text : 'about',
         link : '#',
     },
+    {
+        text : 'logOut',
+        link : '#'
+    }
 ];

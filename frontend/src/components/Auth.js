@@ -1,8 +1,20 @@
 import React, {Component} from 'react'
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    Redirect,
+    withRouter
+  } from "react-router-dom";
+import { createBrowserHistory } from 'history';
+ 
+
+
 import AppForm from './AppForm'
 import SignInFormConfig from '../configs/SignInFormConfig'
 import SignUpFormConfig from '../configs/SignUpFormConfig'
 import {API} from '../configs/APISettings'
+
 
 class Auth extends Component{
     constructor(props){
@@ -20,7 +32,37 @@ class Auth extends Component{
         }, () =>{console.log(this.state)})
     }
 
-    render(){                
+    onSignInHandler = param =>{        
+        localStorage.setItem('loggedIn', Boolean(param))
+        this.setState({authState : param})
+        // this.authHandler()
+    }
+
+    onSignUpHandler = event =>{
+        console.log('Auth on SignUpHandler')
+    }
+
+    componentDidUpdate(){
+        if(this.state.authState === true){
+            console.log('HI Component Updated')            
+            // return <Redirect to='/index'/>
+            // const history = createBrowserHistory();  
+            // history.push('/')
+            // return (
+            // <Router>
+                // return <Redirect push to="/index" />
+            // </Router>)
+        }  
+    }
+
+    render(){
+        console.log('Auth render: ', this.state.authState)
+        console.log('local storage: ', typeof localStorage.getItem('loggedIn'))
+
+        if(this.state.authState === true){            
+            return <Redirect to='/index'/>            
+        }        
+                      
         return(
         <main id='main'>
             <div className='authWrapper'>
@@ -45,7 +87,7 @@ class Auth extends Component{
                 proto={SignInFormConfig}
                 submitText='SignIn'
                 url={API.singIn}
-                authHandler={this.authHandler}
+                submitHandler={this.onSignInHandler}                
             />   
                 
             <AppForm 
@@ -55,6 +97,7 @@ class Auth extends Component{
                 proto={SignUpFormConfig}
                 submitText='SignUp'
                 url={API.singUp}
+                submitHandler={this.onSignUpHandler}
             /> 
             </div>
             

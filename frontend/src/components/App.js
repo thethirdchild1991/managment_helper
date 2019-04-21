@@ -15,69 +15,36 @@ import '../App.css';
 
 class App extends Component {
   constructor(props){
-    super(props)    
+    super(props)  
+    const loggedState = Boolean(localStorage.getItem('loggedIn')) 
+
     this.state = {
-      authState : false,
-    }
-  
-
-    this.routing = (
-
-
-      <Router>      
-        <Switch>
-          <Route path='/' exact component={Main} />              
-          <Route path='/auth'             
-            component={
-              () => <Auth  
-                      authState={this.state.authState} 
-                      authHandler={this.authHandler}
-                    />
-            }            
-          />
-          <Route component={NOPE} />
-        </Switch>
-      </Router>
-    )
+      authState : loggedState ? loggedState : false,
+    }    
+    console.log('From App constructor')
   }
-
-  authHandler = authState => {
-    console.log('From App Auth state: ', authState)
-    this.setState({'authState' : authState }, () =>{console.log('App state: ', this.state)})
-  }
-
-
 
   render() {
 
-    let routing;
-
-    if(this.state.authState === true){
-      routing = <></>      
-    }else{
-      routing =(
-        <Router>      
-        <Switch>
-          <Route path='/' exact component={Main} />              
-          <Route path='/auth'             
-            component={
-              () => <Auth  
-                      authState={this.state.authState} 
-                      authHandler={this.authHandler}
-                    />
-            }            
-          />
-          <Route component={NOPE} />
-        </Switch>
+    const routing = 
+      <Router>
+          <Switch>
+            <Route exact path='/' render={ () =>
+              <><Nav /><Main /> </>
+            }/>
+            <Route path='/index' render={ () =>
+              <><Nav /><Main /></>
+            }/>
+            <Route path='/auth' component={Auth} />
+            <Route component={<h1>NOPE</h1>} />
+          </Switch>
       </Router>
-      )
-    }
 
-    console.log( this.state.authState )
+    
 
     return (
       <>
-        <Header />          
+        <Header />                  
         {routing}
         <Footer />           
       </>      
