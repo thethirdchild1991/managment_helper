@@ -35,26 +35,29 @@ app.get('/selectAllProjects', (req, res) => {
     console.log("selectAllProjects")
     // res.json( DefaultProjectsList )
     // res.send('Hello World!')
-    // ProjectModel.find().lean().exec(function(err,docs){
-    //     if(err){
-    //         console.log(err)
-    //     }else{
-    //         // console.log((JSON.stringify(docs)))
-    //         res.json(docs)
-    //         // return res.end(JSON.stringify(docs));
-    //     }
-    // });
+    Models.ProjectModel.find().lean().exec(function(err,docs){
+        if(err){
+            console.log(err)
+        }else{
+            // console.log((JSON.stringify(docs)))
+            res.json(docs)
+            // return res.end(JSON.stringify(docs));
+        }
+    });
 })
 
 app.post('/signin',function(req,res){
     console.log('signIn:', req.body);
     Models.UserModel.count({username: req.body.username}, (err,count) =>{
         console.log(`found : ${count}`)
-        let loggedIn = false;
-        if( count === 1){
-            loggedIn = true   
+        let status = false;
+        if( count === 0){
+            status = 'wrong username'
         }
-        res.json({ 'loggedIn' :  loggedIn })
+        if( count === 1){
+            status = true   
+        }
+        res.json({ 'loggedIn' :  status })
     })
 
     // Models.UserModel.find({username : req.body.username}).lean().exec(
@@ -80,14 +83,15 @@ app.post('/singup',function(req,res){
             })
         })
 
-    res.end("yes");
+    // res.end("yes");
+    res.json({'status' : 'OK'})
 });
 
 app.post('/createproject',function(req,res){    
     const newPro = new Models.ProjectModel(req.body);    
     newPro.save().then(
         () => {
-            ProjectModel.find().lean().exec(function(err,docs){
+            Models.ProjectModel.find().lean().exec(function(err,docs){
                 if(err){
                     console.log(err)
                 }else{
@@ -98,7 +102,8 @@ app.post('/createproject',function(req,res){
                 }
             })
         })
-    res.end("yes");
+    // res.end("yes");
+    res.json({'status' : 'OK'})
 });
 
 app.post('/createdeveloper',function(req,res){

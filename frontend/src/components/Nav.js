@@ -56,10 +56,10 @@ class Nav extends Component{
     render(){        
         console.log('From Nav render')
         if (this.state.redirect === true) {            
-            this.setState({redirect : false})
+            // this.setState({redirect : false})
             console.log('From Nav render defore redirect')
             
-            return <Redirect to='/index'/>;
+            return <Redirect to='/auth'/>;
         }
 
         return (

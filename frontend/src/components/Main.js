@@ -30,6 +30,7 @@ class Main extends Component{
     }
 
     contentOnState(){
+        console.log(this.state)
         return  this.state.inited === true ?                                         
                     // this.state.data.map( elem => {                        
                     //     return (                            
@@ -50,13 +51,13 @@ class Main extends Component{
 
     componentDidMount(){
         console.log('Main Did mount')
-        fetch(API.addr)
+        fetch(API.selectAllProjects)
             .then(res => res.json())
             .then(
                     // data => console.log(data)
                     (res) => {                        
                         this.setState({inited:true, data:res});
-                        // console.log(this.state.data);
+                        console.log(this.state.data);
                     },                
                     (error) => { console.log('error')}
             );
@@ -76,17 +77,26 @@ class Main extends Component{
         }
         return (
             <main id="main">
-                {/* {this.contentOnState()} */}
-                <AppForm
-                    id='ProjectForm'
-                    url={API.createProject}
-                    proto={ProjectFormConfig} 
-                    submitText="Save Project" />                 
-                <AppForm
-                    id='CreateDeveloper'                         
-                    url={API.createDeveloper}
-                    proto={CreateDeveloperFormConfig}
-                    submitText="Create" />
+                <div className="main">
+                    {this.contentOnState()}
+                    <div className="formWrapper">
+                        <AppForm
+                            id='ProjectForm'
+                            mainClassName='ProjectForm'                    
+                            additionalClassName=''
+                            url={API.createProject}
+                            proto={ProjectFormConfig} 
+                            submitText="Save Project" />                 
+                        <AppForm
+                            id='CreateDeveloper'                         
+                            mainClassName='CreateDeveloper'
+                            additionalClassName=''
+                            url={API.createDeveloper}
+                            proto={CreateDeveloperFormConfig}
+                            submitText="Create" />
+                    </div>
+                </div>
+                
 
 
             </main>

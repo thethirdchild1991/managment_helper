@@ -126,8 +126,29 @@ main {
   display: flex;
   flex-grow: 1;
   flex-direction: row;
-  justify-content: center;  
+  justify-content: center;    
   background: #331E4D;
+}
+
+.main {
+  display: flex;
+  flex-direction: column;    
+  width: max-content
+}
+
+.formWrapper{
+  display: flex;
+  flex-direction: column;    
+  justify-content: center;
+}
+.formWrapper div{
+  display: flex;
+  justify-content: center;  
+  flex-direction: row;
+
+}
+#ProjectForm div, #CreateDeveloper div{
+  justify-content: space-between;
 }
 
 .authWrapper{
@@ -190,6 +211,12 @@ main {
 .projectTable{
   color: white;
   background-color: green;
+  width: max-content;
+  border: solid 3px black;
+  border-collapse: collapse;
+}
+.projectTable th, td{
+  border: solid 2px black;
 }
 
 footer {

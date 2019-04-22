@@ -6,16 +6,15 @@ class ProjectsView extends Component{
         super(props);        
     }
 
-    render(){        
+    render(){  
+        console.log(this.props.data)      
         return  <table className="projectTable">
                     { 
-                        Object.entries(this.props.data[2]).map( pair => {                    
+                        Object.entries(this.props.data[0]).map( pair => {                    
                             const [key, value] = pair;
                             return <th>{key}</th>;
                         }) 
                     }
-                    
-                    
                     
                     { 
                         this.props.data.map( elem => {

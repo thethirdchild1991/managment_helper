@@ -44,11 +44,15 @@ class AppForm extends Component{
             }
         ).then( res => res.json())
         .then( res =>{
+            console.log(res)
             // console.log('fetched : ', res.loggedIn)
             // this.setState({loggedIn: res.loggedIn})
             // if(this.authHandler)
             //     this.authHandler(res.loggedIn)
-            this.extSubmitHandler(Boolean(res.loggedIn))
+            if(this.extSubmitHandler){                
+                this.extSubmitHandler((res.loggedIn))
+            }
+            
         })
     }
 
@@ -67,7 +71,7 @@ class AppForm extends Component{
                     }
                     {
                         this.props.submitText ? 
-                            <input type="submit" value={this.props.submitText} class='submitButton'/>
+                            <input type="submit" value={this.props.submitText} className='submitButton'/>
                         :
                             ''
                     }

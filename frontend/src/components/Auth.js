@@ -33,8 +33,14 @@ class Auth extends Component{
     }
 
     onSignInHandler = param =>{        
-        localStorage.setItem('loggedIn', Boolean(param))
-        this.setState({authState : param})
+        console.log('loggedIn: ', param)
+        if(param === true ){
+            localStorage.setItem('loggedIn', Boolean(param))
+            this.setState({authState : param})
+        }else{
+            localStorage.setItem('loggedIn', Boolean(false))
+            this.setState({authState : false})
+        }
         // this.authHandler()
     }
 
@@ -56,8 +62,7 @@ class Auth extends Component{
     }
 
     render(){
-        console.log('Auth render: ', this.state.authState)
-        console.log('local storage: ', typeof localStorage.getItem('loggedIn'))
+        console.log('Auth render: ', this.state.authState)        
 
         if(this.state.authState === true){            
             return <Redirect to='/index'/>            
