@@ -7,7 +7,7 @@ class ProjectsView extends Component{
     }
 
     render(){  
-        console.log(this.props.data)      
+        console.log('ProjectView: ', this.props.data)      
         return  <table className="projectTable">
                     { 
                         Object.entries(this.props.data[0]).map( pair => {                    

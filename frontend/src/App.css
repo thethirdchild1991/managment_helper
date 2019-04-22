@@ -83,6 +83,8 @@ main {
 
 * {
   margin: 0;
+  padding: 0;
+  border: 0;
 }
 
 body {
@@ -99,7 +101,7 @@ body {
   padding: 20px;
 } */
 
-header, footer, nav, ul{  
+header, footer, #nav, #nav ul{  
   display: flex;
   flex-direction: row;
   /* align-items: center; */
@@ -126,7 +128,7 @@ main {
   display: flex;
   flex-grow: 1;
   flex-direction: row;
-  justify-content: center;    
+  /* justify-content: center;     */  
   background: #331E4D;
 }
 
@@ -134,6 +136,30 @@ main {
   display: flex;
   flex-direction: column;    
   width: max-content
+}
+
+.MainNavWrapper, .MainNavWrapper nav{
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+  flex-basis: 0;
+}
+
+.MainNavWrapper nav, .MainNavWrapper a{
+  background-color: bisque;
+  color: black;
+}
+.MainNavWrapper li{
+  padding: 0;
+}
+
+.MainNavWrapper a{
+  display: inline-block;
+  width: 100%;
+}
+
+.MainNavWrapper a:hover{
+  background-color: green;
 }
 
 .formWrapper{

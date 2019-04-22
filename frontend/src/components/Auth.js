@@ -44,26 +44,14 @@ class Auth extends Component{
         // this.authHandler()
     }
 
-    onSignUpHandler = event =>{
-        console.log('Auth on SignUpHandler')
+    onSignUpHandler = event =>{        
     }
 
-    componentDidUpdate(){
-        if(this.state.authState === true){
-            console.log('HI Component Updated')            
-            // return <Redirect to='/index'/>
-            // const history = createBrowserHistory();  
-            // history.push('/')
-            // return (
-            // <Router>
-                // return <Redirect push to="/index" />
-            // </Router>)
-        }  
+    componentDidUpdate(){         
     }
 
     render(){
-        console.log('Auth render: ', this.state.authState)        
-
+        
         if(this.state.authState === true){            
             return <Redirect to='/index'/>            
         }        

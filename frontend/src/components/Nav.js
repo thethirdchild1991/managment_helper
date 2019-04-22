@@ -40,25 +40,13 @@ class Nav extends Component{
         })        
     }
 
-    componentWillUpdate(){
-        console.log('Nav will update:')
-        console.log('authState: ', this.state.authState)
-        console.log('redirect: ', this.state.redirect)
-        // if( this.state.authState === false && this.state.redirect === true ){
-        //     console.log('Here?')
-        //     this.setState({redirect : false})
-        // }
+    componentWillUpdate(){     
     }
-    componentDidMount(){
-        console.log('Nav did mount')
+    componentDidMount(){        
     }
 
-    render(){        
-        console.log('From Nav render')
-        if (this.state.redirect === true) {            
-            // this.setState({redirect : false})
-            console.log('From Nav render defore redirect')
-            
+    render(){               
+        if (this.state.redirect === true) {                        
             return <Redirect to='/auth'/>;
         }
 

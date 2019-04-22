@@ -45,11 +45,13 @@ class AppForm extends Component{
         ).then( res => res.json())
         .then( res =>{
             console.log(res)
+            console.log(this.extSubmitHandler)
             // console.log('fetched : ', res.loggedIn)
             // this.setState({loggedIn: res.loggedIn})
             // if(this.authHandler)
             //     this.authHandler(res.loggedIn)
-            if(this.extSubmitHandler){                
+            if(this.extSubmitHandler){      
+                console.log('hi')          
                 this.extSubmitHandler((res.loggedIn))
             }
             
