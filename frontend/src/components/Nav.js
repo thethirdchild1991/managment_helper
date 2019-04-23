@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
-import {navData} from '../configs/navSettings';
-// import { Route, Link, BrowserRouter as Router, Switch, Redirect } from 'react-router-dom'
 import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Redirect,
-    withRouter
+    Redirect,    
   } from "react-router-dom";
 
-const navElements = navData.map(
-    val => {
-        return (
-            <li>
-                <a href={val.link}>
-                    {val.text}
-                </a>
-            </li>
-        );
-    }
-);
+// const navElements = navData.map(
+//     val => {
+//         return (
+//             <li>
+//                 <a href={val.link}>
+//                     {val.text}
+//                 </a>
+//             </li>
+//         );
+//     }
+// );
 
 class Nav extends Component{
     constructor(){
-        super();
-        console.log('From Nav constructor')
+        super();        
         this.state = {
             authState : Boolean(localStorage.getItem('loggedIn')),
             redirect : false,

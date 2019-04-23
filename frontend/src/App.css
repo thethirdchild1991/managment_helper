@@ -90,6 +90,9 @@ main {
 body {
   color: white;
 }
+p{
+  color: black;
+}
 
 #root {
   display: flex;
@@ -243,6 +246,22 @@ main {
 }
 .projectTable th, td{
   border: solid 2px black;
+}
+
+.ProjectEditWrapper {
+  display: flex;
+  flex-direction: row;
+}
+
+.ProjectEditWrapper input{
+  flex-grow: 1;
+  border: solid 3px black;
+  line-height: 3;
+}
+
+.ProjectEditWrapper input:active{
+  
+  background-color: #9984D4;
 }
 
 footer {

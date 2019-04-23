@@ -1,26 +1,19 @@
 import React, {Component} from 'react'
 import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Redirect,
-    withRouter
+    Redirect,    
   } from "react-router-dom";
 
 import {guestContent} from '../configs/guestContentSettings'
-import ProjectElem from './ProjectElem'
 import ProjectsView from './ProjectsView'
 import ProjectFormConfig from '../configs/ProjectFormConfig'
-import SignInFormConfig from '../configs/SignInFormConfig'
-import SignUpFormConfig from '../configs/SignUpFormConfig'
 import CreateDeveloperFormConfig from '../configs/CreateDeveloperFormConfig'
 import AppForm from './AppForm'
+import ProjectNavCol from './ProjectNavCol'
 import {API} from '../configs/APISettings'
 
 class Main extends Component{
     constructor(props){
-        super(props);
-        console.log('From main constructor')
+        super(props);        
         const authState = Boolean(localStorage.getItem('loggedIn'))
         this.state = {
             authState: authState,
@@ -29,20 +22,26 @@ class Main extends Component{
         };
     }
 
-    contentOnState(){
-        console.log('Main contentOnState: ',this.state)
-        return  this.state.inited === true ?                                         
-                    // this.state.data.map( elem => {                        
-                    //     return (                            
-                    //             // <ProjectElem mdata={elem.props} />                            
-                    //             <ProjectsView data = {elem.props} />
-                    //     );
-                    // }) :                     
+    ProjectNavBarOnState = () =>{        
+        return  this.state.inited === true ?                                                         
+                    <ProjectNavCol data={this.state.data} />
+                    :
+                    guestContent.map( elem => {
+                        return (
+                        <li key={elem.name}>
+                            {elem.name}
+                        </li>
+                        )
+                    });        
+    }
+
+    ProjectTableOnState(){        
+        return  this.state.inited === true ?                                                                                 
                     <ProjectsView data = {this.state.data}/>
                     :
                     guestContent.map( elem => {
                         return (
-                        <li>
+                        <li key={elem.name}>
                             {elem.name}
                         </li>
                         )
@@ -53,16 +52,19 @@ class Main extends Component{
         this.fetchProjects();
     }
 
+    componentWillUnmount(){
+        //fix fetch after unmount
+        //to call that - click several times at header link
+    }
+
     fetchProjects = param => {        
         fetch(API.selectAllProjects)
             .then(res => res.json())
             .then(
                     // data => console.log(data)
-                    (res) => {  
-                        console.log('Main Fetch Result: ', res);
+                    (res) => {                          
                         if(res.length > 0)
-                            this.setState({inited:true, data:res});
-                        
+                            this.setState({inited:true, data:res});                        
                     },                
                     (error) => { console.log('error')}
             );
@@ -73,21 +75,10 @@ class Main extends Component{
             return <Redirect push to='/auth' />
         }
         return (
-            
-            
             <main id="main">
-                <dv className="MainNavWrapper">
-                   <nav>
-                       <ul>
-                           {this.state.data.map(elem => {
-                               return (<li><a>{elem._id}</a></li>)
-                           })}                           
-                       </ul>
-                    </nav> 
-                </dv>
-                      
+                {this.ProjectNavBarOnState()}  
                 <div className="main">
-                    {this.contentOnState()}
+                    {this.ProjectTableOnState()}
                     <div className="formWrapper">
                         <AppForm
                             id='ProjectForm'
@@ -107,16 +98,8 @@ class Main extends Component{
                             submitText="Create" />
                     </div>
                 </div>
-                <dv className={'MainNavWrapper'}>
-                   {/* <nav>
-                       <ul>
-                           <li><a href="/">First</a></li>
-                           <li><a href="/">Second</a></li>
-                           <li><a href="/">Third</a></li>
-                           <li><a href="/">Fourth</a></li>
-                       </ul>
-                    </nav>  */}
-                </dv>
+                <div className='MainNavWrapper'>                   
+                </div>
             </main>
             
         );

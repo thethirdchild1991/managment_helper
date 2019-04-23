@@ -1,15 +1,14 @@
 import React, {Component} from 'react'
-
+import {Link} from 'react-router-dom'
 class MainLogo extends Component{
-    constructor(  ){
-        super(  );
-    }
     render() {
         return (
             <div id="mainLogo">
-                <a href="#">
+                {/* <a href="index">                 */}
+                <Link to="/">
                     <img src="http://ardeonova.com/sites/all/themes/riftek/logo.png" alt="logo"/>
-                </a>
+                {/* </a> */}
+                </Link>
             </div>  
         );
     }

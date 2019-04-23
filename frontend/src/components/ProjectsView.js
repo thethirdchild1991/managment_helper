@@ -2,26 +2,25 @@ import React, {Component} from 'react'
 import ProjectElem from './ProjectElem';
 
 class ProjectsView extends Component{
-    constructor(props){
-        super(props);        
-    }
-
-    render(){  
-        console.log('ProjectView: ', this.props.data)      
+    render(){          
         return  <table className="projectTable">
-                    { 
-                        Object.entries(this.props.data[0]).map( pair => {                    
-                            const [key, value] = pair;
-                            return <th>{key}</th>;
-                        }) 
-                    }
-                    
+                    <thead>
+                        <tr>
+                        { 
+                            Object.keys(this.props.data[0]).map( key => {                    
+                                // const [key, value] = pair;
+                                return <th key={key}>{key}</th>;
+                            }) 
+                        }
+                        </tr>
+                    </thead>
+                    <tbody>
                     { 
                         this.props.data.map( elem => {
                             return <ProjectElem data={elem}/>
                         }) 
                     }
-                    
+                    </tbody>
                 </table>
     }
 }

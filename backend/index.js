@@ -2,6 +2,7 @@ const express       = require('express');
 const cors          = require('cors');
 const bodyParser    = require("body-parser");
 const Models        = require('./db')
+const mongoose = require('mongoose');
 
 //-------------------------------------------
 const app = express();
@@ -24,6 +25,16 @@ const DefaultProjectsList = [];
 for( let i = 0; i < 3; i++ ){
     DefaultProjectsList.push( new Project() );
 }
+// console.log(mongoose.ObjectId.isValid('5cbd9fe31b8f223e2cace2dd'))
+// Models.ProjectModel.findOne(
+//     {_id: '5cbd9fe31b8f223e2cace2dd'},
+//     (err, doc) =>{
+//         if(err){
+//             console.log(err)
+//         }else{            
+//             console.log(doc)
+//         }
+//     })
 
 
 
@@ -45,6 +56,14 @@ app.get('/selectAllProjects', (req, res) => {
         }
     });
 })
+app.get('/selectProject', (req, res) => {
+    console.log('selectProject', req.query)
+    Models.ProjectModel.find({_id : req.query['id']},(err, doc) =>{
+        console.log('selectProject count: ', doc)
+        res.send(doc)
+    })
+
+});
 
 app.post('/signin',function(req,res){
     console.log('signIn:', req.body);
@@ -105,6 +124,36 @@ app.post('/createproject',function(req,res){
     // res.end("yes");
     res.json({'status' : 'OK'})
 });
+
+app.post('/updateProject', (req, res) => {
+    console.log(req.body.id)
+    Models.ProjectModel.findByIdAndUpdate(
+        req.body.id,
+        {$set:{client : 'req.body.client'}},
+        {new : true},
+        (err, doc) =>{
+            if(err){
+                console.log(err)
+            }else{            
+                console.log(doc)
+                res.json(doc)
+            }
+        })    
+})
+
+app.post('/deleteProject', (req, res) => {
+    console.log(req.body.id)
+    Models.ProjectModel.findByIdAndDelete(
+        req.body.id,                
+        (err, doc) =>{
+            if(err){
+                console.log(err)
+            }else{            
+                console.log(doc)
+                res.json(doc)
+            }
+        })    
+})
 
 app.post('/createdeveloper',function(req,res){
     console.log('createDeveloper: ', req.body);

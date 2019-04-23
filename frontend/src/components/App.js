@@ -1,17 +1,14 @@
 import React, { Component } from 'react';
-import { Route, Link, BrowserRouter as Router, Switch } from 'react-router-dom'
+import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
 import Header from './Header'
 import Footer from './Footer';
 import Nav from './Nav'
 import Main from "./Main";
 import NOPE from './NOPE'
 import Auth from './Auth'
+import ProjectView from './ProjectView'
 
 import '../App.css';
-
-
-
-
 
 class App extends Component {
   constructor(props){
@@ -21,13 +18,13 @@ class App extends Component {
     this.state = {
       authState : loggedState ? loggedState : false,
     }    
-    console.log('From App constructor')
+        
   }
 
   render() {
-
-    const routing = 
+    return (
       <Router>
+        <Header />
           <Switch>
             <Route exact path='/' render={ () =>
               <><Nav /><Main /> </>
@@ -36,18 +33,14 @@ class App extends Component {
               <><Nav /><Main /></>
             }/>
             <Route path='/auth' component={Auth} />
-            <Route component={<h1>NOPE</h1>} />
+            <Route exact path='/project/:id' 
+              render = { (param) => <ProjectView data={param}/> }
+              // componnet={ProjectView}
+             />
+            <Route component={NOPE} />
           </Switch>
+          <Footer />
       </Router>
-
-    
-
-    return (
-      <>
-        <Header />                  
-        {routing}
-        <Footer />           
-      </>      
     );
   }
 }

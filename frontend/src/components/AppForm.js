@@ -20,8 +20,6 @@ class AppForm extends Component{
         this.props.proto.forEach( elem => {
             this.state[elem.id] = elem.text           
         })
-        // console.log('props: ',props)
-        // this.authHandler(true)
     }
 
     changeHandle = event => {
@@ -32,8 +30,7 @@ class AppForm extends Component{
     }
 
     submitHandle = event => {
-        event.preventDefault();
-        console.log('Hello from '+event.target.id+' to '+this._url)
+        event.preventDefault();       
         
         fetch(
             this._url,
@@ -44,17 +41,9 @@ class AppForm extends Component{
             }
         ).then( res => res.json())
         .then( res =>{
-            console.log(res)
-            console.log(this.extSubmitHandler)
-            // console.log('fetched : ', res.loggedIn)
-            // this.setState({loggedIn: res.loggedIn})
-            // if(this.authHandler)
-            //     this.authHandler(res.loggedIn)
-            if(this.extSubmitHandler){      
-                console.log('hi')          
+            if(this.extSubmitHandler){                      
                 this.extSubmitHandler((res.loggedIn))
-            }
-            
+            }            
         })
     }
 

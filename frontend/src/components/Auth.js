@@ -1,15 +1,7 @@
 import React, {Component} from 'react'
 import {
-    BrowserRouter as Router,
-    Route,
-    Link,
-    Redirect,
-    withRouter
+    Redirect,    
   } from "react-router-dom";
-import { createBrowserHistory } from 'history';
- 
-
-
 import AppForm from './AppForm'
 import SignInFormConfig from '../configs/SignInFormConfig'
 import SignUpFormConfig from '../configs/SignUpFormConfig'
@@ -32,23 +24,20 @@ class Auth extends Component{
         }, () =>{console.log(this.state)})
     }
 
-    onSignInHandler = param =>{        
-        console.log('loggedIn: ', param)
+    onSignInHandler = param =>{                
         if(param === true ){
             localStorage.setItem('loggedIn', Boolean(param))
             this.setState({authState : param})
         }else{
             localStorage.setItem('loggedIn', Boolean(false))
             this.setState({authState : false})
-        }
-        // this.authHandler()
+        }        
     }
 
     onSignUpHandler = event =>{        
     }
 
-    componentDidUpdate(){         
-    }
+    
 
     render(){
         
