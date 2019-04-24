@@ -25,48 +25,48 @@ const DefaultProjectsList = [];
 for( let i = 0; i < 3; i++ ){
     DefaultProjectsList.push( new Project() );
 }
-// console.log(mongoose.ObjectId.isValid('5cbd9fe31b8f223e2cace2dd'))
-// Models.ProjectModel.findOne(
-//     {_id: '5cbd9fe31b8f223e2cace2dd'},
-//     (err, doc) =>{
-//         if(err){
-//             console.log(err)
-//         }else{            
-//             console.log(doc)
-//         }
-//     })
-
-
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(( req, res, next) => {
+    console.log(req.path)
+    next()
+})
 
-app.get('/selectAllProjects', (req, res) => {
-    console.log("selectAllProjects")
-    // res.json( DefaultProjectsList )
-    // res.send('Hello World!')
-    Models.ProjectModel.find().lean().exec(function(err,docs){
+app.get('/selectAllProjects', (req, res) => {    
+    Models.ProjectModel.find( {}, (err,users) => {
         if(err){
             console.log(err)
         }else{
-            // console.log((JSON.stringify(docs)))
-            res.json(docs)
-            // return res.end(JSON.stringify(docs));
+            res.send(users)
         }
-    });
+    })
 })
-app.get('/selectProject', (req, res) => {
-    console.log('selectProject', req.query)
-    Models.ProjectModel.find({_id : req.query['id']},(err, doc) =>{
-        console.log('selectProject count: ', doc)
+app.get('/selectProject', (req, res) => {    
+    Models.ProjectModel.findById( req.query['id'],(err, doc) =>{        
         res.send(doc)
     })
 
 });
 
-app.post('/signin',function(req,res){
-    console.log('signIn:', req.body);
+app.get('/selectAllUsers', (req, res) => {
+    Models.UserModel.find( {}, (err,users) => {
+        if(err){
+            console.log(err)
+        }else{
+            res.send(users)
+        }
+    })
+});
+
+app.get('/selectUser', (req, res) => {    
+    Models.UserModel.findById(req.query['id'],(err, doc) => {        
+        res.send(doc)
+    });
+});
+
+app.post('/signin',function(req,res){    
     Models.UserModel.count({username: req.body.username}, (err,count) =>{
         console.log(`found : ${count}`)
         let status = false;
@@ -78,17 +78,9 @@ app.post('/signin',function(req,res){
         }
         res.json({ 'loggedIn' :  status })
     })
-
-    // Models.UserModel.find({username : req.body.username}).lean().exec(
-    //     (err,docs) => {
-    //         console.log(docs)
-    // })
-
-    // res.json({ loggedIn: true })
 });
 
-app.post('/singup',function(req,res){
-    console.log('singUp: ', req.body);
+app.post('/singup',function(req,res){    
     const newUser = new Models.UserModel(req.body);
     newUser.save().then(
         () => {
@@ -100,9 +92,7 @@ app.post('/singup',function(req,res){
                         console.log(docs)
                     }                
             })
-        })
-
-    // res.end("yes");
+        })    
     res.json({'status' : 'OK'})
 });
 
@@ -110,23 +100,12 @@ app.post('/createproject',function(req,res){
     const newPro = new Models.ProjectModel(req.body);    
     newPro.save().then(
         () => {
-            Models.ProjectModel.find().lean().exec(function(err,docs){
-                if(err){
-                    console.log(err)
-                }else{
-                    // console.log((JSON.stringify(docs)))
-                    console.log(docs)
-                    // res.json(docs)
-                    // return res.end(JSON.stringify(docs));
-                }
-            })
-        })
-    // res.end("yes");
-    res.json({'status' : 'OK'})
+            res.json({'status' : 'OK'})        
+        })    
+    
 });
 
-app.post('/updateProject', (req, res) => {
-    console.log(req.body)
+app.post('/updateProject', (req, res) => {    
     Models.ProjectModel.findByIdAndUpdate(
         req.body.id,
         {$set:{client : 'req.body.client'}},
@@ -141,8 +120,22 @@ app.post('/updateProject', (req, res) => {
         })    
 })
 
-app.post('/deleteProject', (req, res) => {
-    console.log(req.body.id)
+app.post('/updateUser', (req, res) => {    
+    Models.UserModel.findByIdAndUpdate(
+        req.body.id,
+        {$set:{role : 'req.body.client'}},
+        {new : true},
+        (err, doc) =>{
+            if(err){
+                console.log(err)
+            }else{            
+                console.log(doc)
+                res.json(doc)
+            }
+        })    
+})
+
+app.post('/deleteProject', (req, res) => {    
     Models.ProjectModel.findByIdAndDelete(
         req.body.id,                
         (err, doc) =>{
@@ -155,9 +148,26 @@ app.post('/deleteProject', (req, res) => {
         })    
 })
 
-app.post('/createdeveloper',function(req,res){
-    console.log('createDeveloper: ', req.body);
-    res.end("yes");
+app.post('/deleteUser', (req, res) => {    
+    Models.UserModel.findByIdAndDelete(
+        req.body.id,                
+        (err, doc) =>{
+            if(err){
+                console.log(err)
+            }else{            
+                console.log(doc)
+                res.json({'status' : 'ok'})
+            }
+        })    
+})
+
+app.post('/createdeveloper',function(req,res){    
+    const newUser = new Models.UserModel(req.body);    
+    newUser.save().then(
+        () => {
+            res.json({'status' : 'OK'})
+        })    
+    
 });
 
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
