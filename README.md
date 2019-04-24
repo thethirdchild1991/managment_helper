@@ -3,11 +3,11 @@
 Tool for task control.
 
 Pages:
-	SignIn/SignUp page
-	main view page accordinly to user role with log out button
-	user page for admin
-	project page for envolved users
-	user profile for user
+	SignIn/SignUp page - #done
+	main view page accordinly to user role with log out button - #with no user role
+	user page for admin - #done
+	project page for envolved users - #done
+	user profile for user - #nope
 
 
 Features:
