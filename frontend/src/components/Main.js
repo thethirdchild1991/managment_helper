@@ -4,7 +4,7 @@ import {
   } from "react-router-dom";
 
 import {guestContent} from '../configs/guestContentSettings'
-import ProjectsView from './ProjectsView'
+import TableView from './TableView'
 import ProjectFormConfig from '../configs/ProjectFormConfig'
 import CreateDeveloperFormConfig from '../configs/CreateDeveloperFormConfig'
 import AppForm from './AppForm'
@@ -18,13 +18,14 @@ class Main extends Component{
         this.state = {
             authState: authState,
             inited : false,
-            data : [],
+            projects : [],
+            users : []
         };
     }
 
     ProjectNavBarOnState = () =>{        
         return  this.state.inited === true ?                                                         
-                    <ProjectNavCol data={this.state.data} />
+                    <ProjectNavCol data={this.state.projects} />
                     :
                     guestContent.map( elem => {
                         return (
@@ -35,9 +36,9 @@ class Main extends Component{
                     });        
     }
 
-    ProjectTableOnState(){        
-        return  this.state.inited === true ?                                                                                 
-                    <ProjectsView data = {this.state.data}/>
+    ProjectTableOnState = () => {        
+        return  this.state.projects.length > 0 ?                                                                                 
+                    <TableView data = {this.state.projects} path='project'/>
                     :
                     guestContent.map( elem => {
                         return (
@@ -48,8 +49,20 @@ class Main extends Component{
                     });
     }
 
-    componentDidMount(){        
-        this.fetchProjects();
+    UsersTableOnState = () => {
+        return  this.state.users.length > 0 ?
+                    <TableView data = {this.state.users} path='user'/>
+                : <></>
+
+    }
+
+
+
+    componentDidMount(){    
+        if(this.state.authState === true) {
+            this.fetchProjects();
+            this.fetchUsers();
+        }
     }
 
     componentWillUnmount(){
@@ -64,10 +77,29 @@ class Main extends Component{
                     // data => console.log(data)
                     (res) => {                          
                         if(res.length > 0)
-                            this.setState({inited:true, data:res});                        
+                            this.setState({
+                                inited : true, 
+                                projects : res,
+                            });                        
                     },                
                     (error) => { console.log('error')}
             );
+    }
+
+    fetchUsers = peram =>{
+        console.log('fetch Users')
+        fetch(API.selectAllUsers)
+        .then( res => res.json())
+        .then(
+            res =>{
+                if(res.length > 0)
+                this.setState({
+                    inited : true, 
+                    users : res,
+                });                        
+            },
+            error => { console.log('error') }
+        );
     }
 
     render(){        
@@ -79,6 +111,7 @@ class Main extends Component{
                 {this.ProjectNavBarOnState()}  
                 <div className="main">
                     {this.ProjectTableOnState()}
+                    {this.UsersTableOnState()}
                     <div className="formWrapper">
                         <AppForm
                             id='ProjectForm'
@@ -95,7 +128,9 @@ class Main extends Component{
                             additionalClassName=''
                             url={API.createDeveloper}
                             proto={CreateDeveloperFormConfig}
-                            submitText="Create" />
+                            submitText="Create" 
+                            submitHandler={this.fetchUsers}                
+                            />
                     </div>
                 </div>
                 <div className='MainNavWrapper'>                   

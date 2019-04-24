@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import ProjectElem from './ProjectElem';
+import TableRowElem from './TableRowElem';
 
-class ProjectsView extends Component{
+class TableView extends Component{
     render(){          
         return  <table className="projectTable">
                     <thead>
@@ -17,7 +17,7 @@ class ProjectsView extends Component{
                     <tbody>
                     { 
                         this.props.data.map( elem => {
-                            return <ProjectElem data={elem}/>
+                            return <TableRowElem data={elem} linkedColumn='_id' path={this.props.path}/>
                         }) 
                     }
                     </tbody>
@@ -25,4 +25,4 @@ class ProjectsView extends Component{
     }
 }
 
-export default ProjectsView;
+export default TableView;

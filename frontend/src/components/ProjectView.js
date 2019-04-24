@@ -14,19 +14,22 @@ class ProjectView extends Component{
     }
 
     componentDidMount(){
+        console.log(this.props.path.fetch)
         if( this.props.data ){
             const { match: { params } } = this.props.data;
+            console.log(params.id)
         
             fetch(
-                    API.selectProject+`?id=${params.id}`                
+                    this.props.path.fetch+`?id=${params.id}`                
                 )
                 .then(res => res.json())
                 .then(                    
-                        (res) => {                          
-                            this.setState({
-                                    status:'inited',
-                                    data : res[0]
-                                })                     
+                        (res) => { 
+                            console.log(res)                      
+                                this.setState({
+                                        status:'inited',
+                                        data : res
+                                    })                     
                         },                
                         (error) => { console.log('here error')}
                 );
@@ -37,7 +40,7 @@ class ProjectView extends Component{
         console.log('Edit Handler')
         
         fetch(
-            API.updateProject,
+            this.props.path.edit,
             {
                 method: "POST",
                 headers: { 'Accept': 'application/json','Content-Type': 'application/json',},
@@ -57,7 +60,7 @@ class ProjectView extends Component{
     deleteHandler = event =>{
         console.log('Delete Handler: ', this.state.data._id)
         fetch(
-            API.deleteProject,
+            this.props.path.delete,
             {
                 method: "POST",
                 headers: { 'Accept': 'application/json','Content-Type': 'application/json',},
@@ -81,43 +84,46 @@ class ProjectView extends Component{
         if( this.state.status === 'redirect' ){
             return <Redirect to='/index'/>                        
         }
-        return(
-            <main id="main">            
-                <div className="main">
-                    <table className="projectTable">
-                        <thead>
-                            <tr>
-                            { 
-                                Object.keys(this.state.data).map( key => {                    
-                                    // const [key, value] = pair;
-                                    return <th>{key}</th>;
-                                }) 
-                            }
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                            { 
-                                Object.entries(this.state.data).map( entry => {
-                                    return (
-                                    <td>
-                                        {/* <input type="text" defaultValue={entry[1]} id={entry[0]}/>   */}
-                                        {entry[1]}                                      
-                                    </td>
-                                    )
-                                }) 
-                            }
-                            </tr>
-                        </tbody>
-                    </table>  
-                    <div className='ProjectEditWrapper'>
-                        <input type='submit' value='Edit' onClick={this.editHandler}/>
-                        <input type='submit' value='Delete' onClick={this.deleteHandler} />
-                    </div>  
+        if( this.state.status === 'inited'){
+            return(
+                <main id="main">            
+                    <div className="main">
+                        <table className="projectTable">
+                            <thead>
+                                <tr>
+                                { 
+                                    Object.keys(this.state.data).map( key => {                    
+                                        // const [key, value] = pair;
+                                        return <th>{key}</th>;
+                                    }) 
+                                }
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                { 
+                                    Object.entries(this.state.data).map( entry => {
+                                        return (
+                                        <td>
+                                            {/* <input type="text" defaultValue={entry[1]} id={entry[0]}/>   */}
+                                            {entry[1]}                                      
+                                        </td>
+                                        )
+                                    }) 
+                                }
+                                </tr>
+                            </tbody>
+                        </table>  
+                        <div className='ProjectEditWrapper'>
+                            <input type='submit' value='Edit' onClick={this.editHandler}/>
+                            <input type='submit' value='Delete' onClick={this.deleteHandler} />
+                        </div>  
 
-                </div>
-            </main>
-        )
+                    </div>
+                </main>
+            )
+        }
+        return <main></main>;
     };
 };
 

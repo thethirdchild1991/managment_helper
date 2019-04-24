@@ -138,7 +138,8 @@ main {
 .main {
   display: flex;
   flex-direction: column;    
-  width: max-content
+  width: max-content;  
+
 }
 
 .MainNavWrapper, .MainNavWrapper nav{
@@ -243,10 +244,19 @@ main {
   width: max-content;
   border: solid 3px black;
   border-collapse: collapse;
+  align-self: center;
 }
 .projectTable th, td{
   border: solid 2px black;
 }
+.projectTable a{
+  display: inline-block;
+  width: 100%;
+}
+.projectTable a:hover, tr:hover{
+  background-color: red;
+}
+
 
 .ProjectEditWrapper {
   display: flex;

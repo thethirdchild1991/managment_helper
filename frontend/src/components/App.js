@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Route, BrowserRouter as Router, Switch } from 'react-router-dom'
+import {API} from '../configs/APISettings'
 import Header from './Header'
 import Footer from './Footer';
 import Nav from './Nav'
@@ -25,21 +26,47 @@ class App extends Component {
     return (
       <Router>
         <Header />
-          <Switch>
-            <Route exact path='/' render={ () =>
-              <><Nav /><Main /> </>
-            }/>
-            <Route path='/index' render={ () =>
-              <><Nav /><Main /></>
-            }/>
-            <Route path='/auth' component={Auth} />
-            <Route exact path='/project/:id' 
-              render = { (param) => <ProjectView data={param}/> }
-              // componnet={ProjectView}
-             />
-            <Route component={NOPE} />
-          </Switch>
-          <Footer />
+        <Switch>
+          <Route 
+            exact 
+            path='/' 
+            render={ () => <><Nav /><Main /></> }
+          />
+          <Route 
+            path='/index' 
+            render={ () => <><Nav /><Main /></> }
+          />
+          <Route 
+            path='/auth' 
+            component={Auth} 
+          />
+          <Route 
+            exact 
+            path='/project/:id' 
+            render = { (param) => <ProjectView 
+                                    data={param} 
+                                    path={{
+                                            fetch : API.selectProject,
+                                            edit : API.updateProject,
+                                            delete : API.deleteProject,
+                                          }}
+                                  /> }              
+          />
+          <Route 
+            exact 
+            path='/user/:id' 
+            render = { (param) => <ProjectView 
+                                    data={param} 
+                                    path={{
+                                            fetch : API.selectUser,
+                                            edit : API.updateUser,
+                                            delete : API.deleteUser,
+                                          }}
+                                    /> }   
+          />
+          <Route component={NOPE} />
+        </Switch>
+        <Footer />
       </Router>
     );
   }

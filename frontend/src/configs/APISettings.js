@@ -8,5 +8,9 @@ export const API = {
     deleteProject : APIAddr+'/deleteProject',
     singIn : APIAddr+'/signin',
     singUp : APIAddr+'/singup',
+    selectAllUsers :  APIAddr+'/selectAllUsers',
+    selectUser : APIAddr+'/selectUser',
+    updateUser : APIAddr+'/updateUser',
+    deleteUser : APIAddr+'/deleteUser',
     createDeveloper: APIAddr+'/createdeveloper',
 }
