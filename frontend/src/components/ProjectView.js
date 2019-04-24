@@ -1,11 +1,14 @@
 import React, {Component} from 'react'
-
+import {
+    Redirect,    
+  } from "react-router-dom";
 import {API} from '../configs/APISettings'
 
 class ProjectView extends Component{
     constructor(props){
         super(props)
         this.state={
+            status : 'empty',
             data : {}
         }
     }
@@ -20,7 +23,10 @@ class ProjectView extends Component{
                 .then(res => res.json())
                 .then(                    
                         (res) => {                          
-                            this.setState({data : res[0]})                     
+                            this.setState({
+                                    status:'inited',
+                                    data : res[0]
+                                })                     
                         },                
                         (error) => { console.log('here error')}
                 );
@@ -49,7 +55,7 @@ class ProjectView extends Component{
     }
 
     deleteHandler = event =>{
-        console.log('Delete Handler')
+        console.log('Delete Handler: ', this.state.data._id)
         fetch(
             API.deleteProject,
             {
@@ -61,15 +67,20 @@ class ProjectView extends Component{
         .then( res => res.json() )
         .then(                    
             (res) => {
-                console.log(res)                          
-                this.setState({data : res})                     
+                console.log(res.status)   
+                if(res.status === 'ok')                       
+                this.setState({status : 'redirect'})                     
             },                
             (error) => { console.log('here error')}
         );        
 
     }
 
+
     render(){                
+        if( this.state.status === 'redirect' ){
+            return <Redirect to='/index'/>                        
+        }
         return(
             <main id="main">            
                 <div className="main">
@@ -87,8 +98,13 @@ class ProjectView extends Component{
                         <tbody>
                             <tr>
                             { 
-                                Object.values(this.state.data).map( elem => {
-                                    return <td>{elem}</td>
+                                Object.entries(this.state.data).map( entry => {
+                                    return (
+                                    <td>
+                                        {/* <input type="text" defaultValue={entry[1]} id={entry[0]}/>   */}
+                                        {entry[1]}                                      
+                                    </td>
+                                    )
                                 }) 
                             }
                             </tr>

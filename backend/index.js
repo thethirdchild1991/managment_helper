@@ -126,7 +126,7 @@ app.post('/createproject',function(req,res){
 });
 
 app.post('/updateProject', (req, res) => {
-    console.log(req.body.id)
+    console.log(req.body)
     Models.ProjectModel.findByIdAndUpdate(
         req.body.id,
         {$set:{client : 'req.body.client'}},
@@ -150,7 +150,7 @@ app.post('/deleteProject', (req, res) => {
                 console.log(err)
             }else{            
                 console.log(doc)
-                res.json(doc)
+                res.json({'status' : 'ok'})
             }
         })    
 })
