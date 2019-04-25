@@ -2,7 +2,8 @@ const express       = require('express');
 const cors          = require('cors');
 const bodyParser    = require("body-parser");
 const Models        = require('./db')
-const mongoose = require('mongoose');
+const mongoose      = require('mongoose');
+const routes        = require('./routes')
 
 //-------------------------------------------
 const app = express();
@@ -33,38 +34,8 @@ app.use(( req, res, next) => {
     console.log(req.path)
     next()
 })
+app.use(routes)
 
-app.get('/selectAllProjects', (req, res) => {    
-    Models.ProjectModel.find( {}, (err,users) => {
-        if(err){
-            console.log(err)
-        }else{
-            res.send(users)
-        }
-    })
-})
-app.get('/selectProject', (req, res) => {    
-    Models.ProjectModel.findById( req.query['id'],(err, doc) =>{        
-        res.send(doc)
-    })
-
-});
-
-app.get('/selectAllUsers', (req, res) => {
-    Models.UserModel.find( {}, (err,users) => {
-        if(err){
-            console.log(err)
-        }else{
-            res.send(users)
-        }
-    })
-});
-
-app.get('/selectUser', (req, res) => {    
-    Models.UserModel.findById(req.query['id'],(err, doc) => {        
-        res.send(doc)
-    });
-});
 
 app.post('/signin',function(req,res){    
     Models.UserModel.count({username: req.body.username}, (err,count) =>{
@@ -105,61 +76,6 @@ app.post('/createproject',function(req,res){
     
 });
 
-app.post('/updateProject', (req, res) => {    
-    Models.ProjectModel.findByIdAndUpdate(
-        req.body.id,
-        {$set:{client : 'req.body.client'}},
-        {new : true},
-        (err, doc) =>{
-            if(err){
-                console.log(err)
-            }else{            
-                console.log(doc)
-                res.json(doc)
-            }
-        })    
-})
-
-app.post('/updateUser', (req, res) => {    
-    Models.UserModel.findByIdAndUpdate(
-        req.body.id,
-        {$set:{role : 'req.body.client'}},
-        {new : true},
-        (err, doc) =>{
-            if(err){
-                console.log(err)
-            }else{            
-                console.log(doc)
-                res.json(doc)
-            }
-        })    
-})
-
-app.post('/deleteProject', (req, res) => {    
-    Models.ProjectModel.findByIdAndDelete(
-        req.body.id,                
-        (err, doc) =>{
-            if(err){
-                console.log(err)
-            }else{            
-                console.log(doc)
-                res.json({'status' : 'ok'})
-            }
-        })    
-})
-
-app.post('/deleteUser', (req, res) => {    
-    Models.UserModel.findByIdAndDelete(
-        req.body.id,                
-        (err, doc) =>{
-            if(err){
-                console.log(err)
-            }else{            
-                console.log(doc)
-                res.json({'status' : 'ok'})
-            }
-        })    
-})
 
 app.post('/createdeveloper',function(req,res){    
     const newUser = new Models.UserModel(req.body);    

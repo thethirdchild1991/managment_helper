@@ -18,6 +18,8 @@ class ProjectView extends Component{
         if( this.props.data ){
             const { match: { params } } = this.props.data;
             console.log(params.id)
+
+            console.log(this.props.path.fetch+`?id=${params.id}`) 
         
             fetch(
                     this.props.path.fetch+`?id=${params.id}`                

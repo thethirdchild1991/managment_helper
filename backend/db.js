@@ -35,6 +35,8 @@ const UserModel = mongoose.model('User', UserSchema);
 //         // return res.end(JSON.stringify(docs));
 //     }
 // });
+module.exports.project =  ProjectModel;
+module.exports.user =  UserModel;
 module.exports.ProjectModel =  ProjectModel;
 module.exports.UserModel =  UserModel;
 
