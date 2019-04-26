@@ -25,40 +25,49 @@ router.get('/:action/:target', (req, res, next) =>{
 
 });
 
-router.post('/:action/:target', (req, res, next) => {    
+router.put('/:action/:target', (req, res, next) => {    
     const action = req.params.action
     const target = req.params.target
     const id = req.body.id
+    console.log('PUT METHOD')
 
     if( action === 'update'){
         Models[target].findByIdAndUpdate(
-            req.body.id,
+            id,
             {$set:{client : 'req.body.client'}},
             {new : true},
             (err, doc) =>{
                 if(err){
                     console.log(err)
-                }else{                                
+                }else{
+                    console.log('UPDATED')                                
                     res.json(doc)
                 }
             }
         )
     } 
+});
+
+router.delete('/:action/:target', (req,res, next) =>{
+    const action = req.params.action
+    const target = req.params.target
+    const id = req.body.id
 
     if( action === 'delete'){    
         Models[target].findByIdAndDelete(
-            req.body.id,                
+            id,
             (err, doc) =>{
                 if(err){
                     console.log(err)
                 }else{            
-                    console.log(doc)
+                    // console.log(doc)
+                    console.log('DELETED')
                     res.json({'status' : 'ok'})
                 }
             }
         )    
     }
-})
+});
 
 
 

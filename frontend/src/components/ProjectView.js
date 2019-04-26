@@ -44,7 +44,7 @@ class ProjectView extends Component{
         fetch(
             this.props.path.edit,
             {
-                method: "POST",
+                method: "PUT",
                 headers: { 'Accept': 'application/json','Content-Type': 'application/json',},
                 body:  JSON.stringify({id : this.state.data._id})
             }
@@ -64,7 +64,7 @@ class ProjectView extends Component{
         fetch(
             this.props.path.delete,
             {
-                method: "POST",
+                method: "DELETE",
                 headers: { 'Accept': 'application/json','Content-Type': 'application/json',},
                 body:  JSON.stringify({id : this.state.data._id})
             }
