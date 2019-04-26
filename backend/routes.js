@@ -2,15 +2,13 @@ const express   = require('express')
 const router    = express.Router();
 const Models    = require('./db')
 
-router.get('/:action/:target', (req, res, next) =>{
-    console.log(req.params)    
+router.get('/:action/:target', (req, res, next) =>{    
     const action = req.params.action
     const target = req.params.target
     const id = req.query['id']
     
     if( id ){    
-        Models[target].findById(req.query['id'],(err, doc) => {        
-            console.log(doc)
+        Models[target].findById(req.query['id'],(err, doc) => {                    
             res.send(doc)
         });    
     }else{
@@ -25,11 +23,57 @@ router.get('/:action/:target', (req, res, next) =>{
 
 });
 
+
+router.post('/signin', (req, res, next) => {
+    // const action = req.params.action
+    const username = req.body.username
+    const password = req.body.password
+    
+    Models.user.find(
+        {username : username}, 
+        (err, docs) => {
+            if(err){
+                console.log('error: ', err)
+            }else{
+                console.log(docs.length)
+                if(docs.length === 1){
+                    res.json({loggedIn : 'true',})                    
+                }else{
+                    res.json({loggedIn : 'false',})
+                }
+            }
+    })    
+})
+
+router.post('/signup', (req, res, next) => {    
+    const newUser = new Models.user(req.body);
+    newUser.save(
+        (err,doc) => {
+            if(err){
+                console.log('err')
+            }else{
+                console.log('saved')
+                res.json({'status' : 'OK'})        
+            }
+        })    
+})
+
+router.post('/:action/:target', (req, res, next) => {        
+    const target = req.params.target    
+
+    const newTarget = new Models[target](req.body)
+    newTarget.save().then(() =>{
+        res.json({'status' : 'OK'})
+    })
+})
+
+
+
+
 router.put('/:action/:target', (req, res, next) => {    
     const action = req.params.action
     const target = req.params.target
-    const id = req.body.id
-    console.log('PUT METHOD')
+    const id = req.body.id    
 
     if( action === 'update'){
         Models[target].findByIdAndUpdate(
@@ -39,8 +83,7 @@ router.put('/:action/:target', (req, res, next) => {
             (err, doc) =>{
                 if(err){
                     console.log(err)
-                }else{
-                    console.log('UPDATED')                                
+                }else{                    
                     res.json(doc)
                 }
             }
@@ -60,19 +103,12 @@ router.delete('/:action/:target', (req,res, next) =>{
                 if(err){
                     console.log(err)
                 }else{            
-                    // console.log(doc)
-                    console.log('DELETED')
                     res.json({'status' : 'ok'})
                 }
             }
         )    
     }
 });
-
-
-
-
-
 
 
 module.exports = router;

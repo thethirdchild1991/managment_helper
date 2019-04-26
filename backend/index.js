@@ -36,56 +36,6 @@ app.use(( req, res, next) => {
 })
 app.use(routes)
 
-
-app.post('/signin',function(req,res){    
-    Models.UserModel.count({username: req.body.username}, (err,count) =>{
-        console.log(`found : ${count}`)
-        let status = false;
-        if( count === 0){
-            status = 'wrong username'
-        }
-        if( count === 1){
-            status = true   
-        }
-        res.json({ 'loggedIn' :  status })
-    })
-});
-
-app.post('/singup',function(req,res){    
-    const newUser = new Models.UserModel(req.body);
-    newUser.save().then(
-        () => {
-            Models.UserModel.find().lean().exec(
-                (err, docs) => {
-                    if(err){
-                        console.log(err)
-                    }else{
-                        console.log(docs)
-                    }                
-            })
-        })    
-    res.json({'status' : 'OK'})
-});
-
-app.post('/createproject',function(req,res){    
-    const newPro = new Models.ProjectModel(req.body);    
-    newPro.save().then(
-        () => {
-            res.json({'status' : 'OK'})        
-        })    
-    
-});
-
-
-app.post('/createdeveloper',function(req,res){    
-    const newUser = new Models.UserModel(req.body);    
-    newUser.save().then(
-        () => {
-            res.json({'status' : 'OK'})
-        })    
-    
-});
-
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
 
 
