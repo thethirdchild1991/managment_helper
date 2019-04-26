@@ -39,7 +39,7 @@ class AppForm extends Component{
                 headers: { 'Accept': 'application/json','Content-Type': 'application/json',},
                 body:  JSON.stringify(this.state)
             }
-        ).then( res => res.json())
+        ).then( res => res.json() )
         .then( res =>{
             if(this.extSubmitHandler){                      
                 this.extSubmitHandler(res)
