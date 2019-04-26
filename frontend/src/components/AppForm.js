@@ -13,7 +13,7 @@ class AppForm extends Component{
         super(props)
         
         this._url = props.url
-        this.extSubmitHandler=props.submitHandler
+        this.extSubmitHandler=props.extSubmitHandler
         this.state = {
             loggedIn : false
         }
@@ -42,7 +42,7 @@ class AppForm extends Component{
         ).then( res => res.json())
         .then( res =>{
             if(this.extSubmitHandler){                      
-                this.extSubmitHandler((res.loggedIn))
+                this.extSubmitHandler(JSON.parse(res.loggedIn))
             }            
         })
     }

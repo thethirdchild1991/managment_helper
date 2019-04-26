@@ -13,8 +13,8 @@ import {API} from '../configs/APISettings'
 
 class Main extends Component{
     constructor(props){
-        super(props);        
-        const authState = Boolean(localStorage.getItem('loggedIn'))
+        super(props);           
+        const authState = JSON.parse(localStorage.getItem('loggedIn'))        
         this.state = {
             authState: authState,
             inited : false,
@@ -73,8 +73,7 @@ class Main extends Component{
     fetchProjects = param => {        
         fetch(API.selectAllProjects)
             .then(res => res.json())
-            .then(
-                    // data => console.log(data)
+            .then(                    
                     (res) => {                          
                         if(res.length > 0)
                             this.setState({
@@ -86,8 +85,7 @@ class Main extends Component{
             );
     }
 
-    fetchUsers = peram =>{
-        console.log('fetch Users')
+    fetchUsers = param =>{        
         fetch(API.selectAllUsers)
         .then( res => res.json())
         .then(
@@ -102,7 +100,8 @@ class Main extends Component{
         );
     }
 
-    render(){        
+    render(){  
+        
         if(this.state.authState !== true){
             return <Redirect push to='/auth' />
         }
@@ -120,7 +119,7 @@ class Main extends Component{
                             url={API.createProject}
                             proto={ProjectFormConfig} 
                             submitText="Save Project" 
-                            submitHandler={this.fetchProjects}                
+                            extSubmitHandler={this.fetchProjects}                
                             />                 
                         <AppForm
                             id='CreateDeveloper'                         
@@ -129,7 +128,7 @@ class Main extends Component{
                             url={API.createDeveloper}
                             proto={CreateDeveloperFormConfig}
                             submitText="Create" 
-                            submitHandler={this.fetchUsers}                
+                            extSubmitHandler={this.fetchUsers}                
                             />
                     </div>
                 </div>

@@ -24,12 +24,12 @@ class Auth extends Component{
         }, () =>{console.log(this.state)})
     }
 
-    onSignInHandler = param =>{                
+    onSignInHandler = param =>{           
         if(param === true ){
-            localStorage.setItem('loggedIn', Boolean(param))
+            localStorage.setItem('loggedIn', param)            
             this.setState({authState : param})
         }else{
-            localStorage.setItem('loggedIn', Boolean(false))
+            localStorage.setItem('loggedIn', false)            
             this.setState({authState : false})
         }        
     }
@@ -39,9 +39,10 @@ class Auth extends Component{
 
     
 
-    render(){
+    render(){       
         
         if(this.state.authState === true){            
+            console.log('redirect')
             return <Redirect to='/index'/>            
         }        
                       
@@ -69,7 +70,7 @@ class Auth extends Component{
                 proto={SignInFormConfig}
                 submitText='SignIn'
                 url={API.singIn}
-                submitHandler={this.onSignInHandler}                
+                extSubmitHandler={this.onSignInHandler}                
             />   
                 
             <AppForm 
@@ -79,7 +80,7 @@ class Auth extends Component{
                 proto={SignUpFormConfig}
                 submitText='SignUp'
                 url={API.singUp}
-                submitHandler={this.onSignUpHandler}
+                extSubmitHandler={this.onSignUpHandler}
             /> 
             </div>
             

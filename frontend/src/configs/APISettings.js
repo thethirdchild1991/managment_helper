@@ -1,7 +1,7 @@
 const APIAddr = 'http://localhost:5000';
 export const API = {
     addr : APIAddr,
-    createProject : APIAddr+'/createproject',
+    createProject : APIAddr+'/create/project',
     selectAllProjects : APIAddr+'/select/project',
     selectProject : APIAddr+'/select/project',
     updateProject : APIAddr+'/update/project',
@@ -12,5 +12,5 @@ export const API = {
     selectUser : APIAddr+'/select/user',
     updateUser : APIAddr+'/update/user',
     deleteUser : APIAddr+'/delete/user',
-    createDeveloper: APIAddr+'/createdeveloper',
+    createDeveloper: APIAddr+'/create/user',
 }
