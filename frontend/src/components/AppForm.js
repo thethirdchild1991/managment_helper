@@ -42,7 +42,7 @@ class AppForm extends Component{
         ).then( res => res.json())
         .then( res =>{
             if(this.extSubmitHandler){                      
-                this.extSubmitHandler(JSON.parse(res.loggedIn))
+                this.extSubmitHandler(res)
             }            
         })
     }

@@ -7,7 +7,7 @@ export const API = {
     updateProject : APIAddr+'/update/project',
     deleteProject : APIAddr+'/delete/project',
     singIn : APIAddr+'/signin',
-    singUp : APIAddr+'/singup',
+    singUp : APIAddr+'/signup',
     selectAllUsers :  APIAddr+'/select/user',
     selectUser : APIAddr+'/select/user',
     updateUser : APIAddr+'/update/user',

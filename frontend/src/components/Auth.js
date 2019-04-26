@@ -24,10 +24,11 @@ class Auth extends Component{
         }, () =>{console.log(this.state)})
     }
 
-    onSignInHandler = param =>{           
-        if(param === true ){
-            localStorage.setItem('loggedIn', param)            
-            this.setState({authState : param})
+    onSignInHandler = param =>{ 
+        const AuthStatus = JSON.parse(param.loggedIn)                  
+        if(AuthStatus === true ){
+            localStorage.setItem('loggedIn', AuthStatus)            
+            this.setState({authState : AuthStatus})
         }else{
             localStorage.setItem('loggedIn', false)            
             this.setState({authState : false})
