@@ -30,16 +30,21 @@ router.post('/signin', (req, res, next) => {
     const password = req.body.password
     
     Models.user.find(
-        {username : username}, 
+        {   
+            username : username,
+            password : password
+        }, 
         (err, docs) => {
             if(err){
                 console.log('error: ', err)
             }else{
-                console.log(docs.length)
                 if(docs.length === 1){
                     res.json({loggedIn : 'true',})                    
                 }else{
-                    res.json({loggedIn : 'false',})
+                    res.json({
+                                loggedIn : 'false', 
+                                errors : ['wrong username or password']
+                            })
                 }
             }
     })    
@@ -48,9 +53,10 @@ router.post('/signin', (req, res, next) => {
 router.post('/signup', (req, res, next) => {    
     const newUser = new Models.user(req.body);
     newUser.save(
-        (err,doc) => {
-            if(err){
-                console.log('err')
+        (error,doc) => {
+            if(error){
+                console.log(Object.keys(error.errors))
+                res.json({'status': 'Fail',  errors : Object.keys(error.errors) })
             }else{
                 console.log('saved')
                 res.json({'status' : 'OK'})        
