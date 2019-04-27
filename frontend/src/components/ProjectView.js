@@ -3,61 +3,58 @@ import {
     Redirect,    
   } from "react-router-dom";
 import {API} from '../configs/APISettings'
+import AppForm from './AppForm'
+import editUserFormConfig from '../configs/editUserFormConfig'
 
 class ProjectView extends Component{
     constructor(props){
         super(props)
+        const { match: { params } } = this.props.data;
+        // console.log('from constructor: ', params.id)
         this.state={
             status : 'empty',
-            data : {}
+            showEditForm : false,
+            data : {},
+            params : params,
+            path :  this.props.path,
+            proto : this.props.proto,
         }
     }
 
     componentDidMount(){
         console.log(this.props.path.fetch)
         if( this.props.data ){
-            const { match: { params } } = this.props.data;
-            console.log(params.id)
-
-            console.log(this.props.path.fetch+`?id=${params.id}`) 
-        
-            fetch(
-                    this.props.path.fetch+`?id=${params.id}`                
-                )
-                .then(res => res.json())
-                .then(                    
-                        (res) => { 
-                            console.log(res)                      
-                                this.setState({
-                                        status:'inited',
-                                        data : res
-                                    })                     
-                        },                
-                        (error) => { console.log('here error')}
-                );
+            // const { match: { params } } = this.props.data;
+            console.log(this.state.params.id)
+            console.log(this.state.path.fetch+`?id=${this.state.params.id}`) 
+            this.fetchElem()            
         }
     }
 
-    editHandler = event => {
-        console.log('Edit Handler')
-        
+    fetchElem = () => {
+        console.log('fetching')                
         fetch(
-            this.props.path.edit,
-            {
-                method: "PUT",
-                headers: { 'Accept': 'application/json','Content-Type': 'application/json',},
-                body:  JSON.stringify({id : this.state.data._id})
-            }
+            this.state.path.fetch+`?id=${this.state.params.id}`                
         )
-        .then( res => res.json() )
+        .then(res => res.json())
         .then(                    
-            (res) => {
-                console.log(res)                          
-                this.setState({data : res})                     
-            },                
-            (error) => { console.log('here error')}
-    );
+                (res) => { 
+                    console.log('fetch res: ', res)                      
+                        this.setState({
+                                status:'inited',
+                                data : res,
+                                showEditForm : false,
+                            })                     
+                },                
+                (error) => { console.log('here error')}
+        );
     }
+
+    editHandler = event => {
+        this.setState({ showEditForm : true })
+        console.log('Edit Handler')
+    }
+    
 
     deleteHandler = event =>{
         console.log('Delete Handler: ', this.state.data._id)
@@ -86,6 +83,7 @@ class ProjectView extends Component{
         if( this.state.status === 'redirect' ){
             return <Redirect to='/index'/>                        
         }
+        
         if( this.state.status === 'inited'){
             return(
                 <main id="main">            
@@ -115,7 +113,22 @@ class ProjectView extends Component{
                                 }
                                 </tr>
                             </tbody>
-                        </table>  
+                        </table>
+                        {this.state.showEditForm === true ? 
+                            <div className="formWrapper">
+                                <AppForm
+                                id='EditUser'                         
+                                mainClassName='EditUser'
+                                additionalClassName=''
+                                url={this.state.path.edit}
+                                httpMethod='PUT'
+                                proto={this.state.proto}
+                                submitText="Save" 
+                                extSubmitHandler={this.fetchElem}                
+                                />
+                            </div>
+                            :
+                             <></>}  
                         <div className='ProjectEditWrapper'>
                             <input type='submit' value='Edit' onClick={this.editHandler}/>
                             <input type='submit' value='Delete' onClick={this.deleteHandler} />

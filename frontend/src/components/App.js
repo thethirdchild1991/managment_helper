@@ -8,6 +8,8 @@ import Main from "./Main";
 import NOPE from './NOPE'
 import Auth from './Auth'
 import ProjectView from './ProjectView'
+import editUserFormConfig from '../configs/editUserFormConfig'
+import editProjectFormConfig from '../configs/editProjectFormConfig'
 
 import '../App.css';
 
@@ -48,8 +50,9 @@ class App extends Component {
                                     path={{
                                             fetch : API.selectProject,
                                             edit : API.updateProject,
-                                            delete : API.deleteProject,
+                                            delete : API.delenpmteProject,
                                           }}
+                                    proto={editProjectFormConfig}
                                   /> }              
           />
           <Route 
@@ -62,6 +65,7 @@ class App extends Component {
                                             edit : API.updateUser,
                                             delete : API.deleteUser,
                                           }}
+                                    proto={editUserFormConfig}
                                     /> }   
           />
           <Route component={NOPE} />

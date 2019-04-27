@@ -14,6 +14,7 @@ class AppForm extends Component{
         
         this._url = props.url
         this.extSubmitHandler=props.extSubmitHandler
+        this.httpMethod = props.httpMethod
         this.state = {
             loggedIn : false
         }
@@ -30,12 +31,13 @@ class AppForm extends Component{
     }
 
     submitHandle = event => {
-        event.preventDefault();       
+        event.preventDefault();  
+        console.log('submitHandler: ', this._url)     
         
         fetch(
             this._url,
             {
-                method: "POST",
+                method: this.httpMethod,
                 headers: { 'Accept': 'application/json','Content-Type': 'application/json',},
                 body:  JSON.stringify(this.state)
             }

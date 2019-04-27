@@ -177,7 +177,7 @@ main {
   flex-direction: row;
 
 }
-#ProjectForm div, #CreateDeveloper div{
+#ProjectForm div, #CreateDeveloper div, #EditUser div{
   justify-content: space-between;
 }
 

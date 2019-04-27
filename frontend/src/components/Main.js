@@ -117,6 +117,7 @@ class Main extends Component{
                             mainClassName='ProjectForm'                    
                             additionalClassName=''
                             url={API.createProject}
+                            httpMethod='POST'
                             proto={ProjectFormConfig} 
                             submitText="Save Project" 
                             extSubmitHandler={this.fetchProjects}                
@@ -126,6 +127,7 @@ class Main extends Component{
                             mainClassName='CreateDeveloper'
                             additionalClassName=''
                             url={API.createDeveloper}
+                            httpMethod='POST'
                             proto={CreateDeveloperFormConfig}
                             submitText="Create" 
                             extSubmitHandler={this.fetchUsers}                
