@@ -62,8 +62,13 @@ router.post('/:action/:target', (req, res, next) => {
     const target = req.params.target    
 
     const newTarget = new Models[target](req.body)
-    newTarget.save().then(() =>{
-        res.json({'status' : 'OK'})
+    newTarget.save((error, product) => {
+        if(error){
+            console.log(Object.keys(error.errors))
+            res.json({'status': 'Fail',  errors : Object.keys(error.errors) })
+        }else{
+            res.json({'status' : 'OK'})
+        }
     })
 })
 
@@ -73,9 +78,9 @@ router.post('/:action/:target', (req, res, next) => {
 router.put('/:action/:target', (req, res, next) => {    
     const action = req.params.action
     const target = req.params.target
-    const id = req.body.id    
+    const id = req.body.id        
 
-    if( action === 'update'){
+    if( action === 'update'){        
         Models[target].findByIdAndUpdate(
             id,
             {$set:{client : 'req.body.client'}},
@@ -83,7 +88,8 @@ router.put('/:action/:target', (req, res, next) => {
             (err, doc) =>{
                 if(err){
                     console.log(err)
-                }else{                    
+                }else{   
+                    console.log(doc)                 
                     res.json(doc)
                 }
             }
