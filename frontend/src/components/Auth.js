@@ -14,7 +14,15 @@ class Auth extends Component{
         this.authHandler = props.authHandler
         this.state = {
             authState : props.authState,            
-            active : 'signInTab'
+            active : 'signInTab',
+            errors :    {
+                            signIn : [],
+                            signUp : [],
+                        },
+            success :    {
+                signIn : [],
+                signUp : [],
+            },
         }
     }
 
@@ -31,14 +39,36 @@ class Auth extends Component{
             this.setState({authState : AuthStatus})
         }else{
             localStorage.setItem('loggedIn', false)            
-            this.setState({authState : false})
+            const errors = this.state.errors
+            errors.signIn = param.errors;            
+            this.setState({ 
+                            errors : errors,
+                            authState : false
+                        })
         }        
     }
 
-    onSignUpHandler = event =>{        
-    }
+    onSignUpHandler = param =>{  
+        let status = false;
+        if(param.status === 'OK'){
+            status = true;
+            const success = this.state.success
+            success.signUp = ['Done']            
+            this.setState({ 
+                            success : success,                            
+                        })
 
-    
+        }else{
+            status = false;
+            const errors = this.state.errors
+            errors.signUp = param.errors;                        
+            this.setState({ 
+                            errors : errors,
+                            authState : false
+                        })
+        }
+    }
+   
 
     render(){       
         
@@ -71,7 +101,9 @@ class Auth extends Component{
                 proto={SignInFormConfig}
                 submitText='SignIn'
                 url={API.singIn}
-                extSubmitHandler={this.onSignInHandler}                
+                httpMethod='POST'
+                extSubmitHandler={this.onSignInHandler} 
+                errorMessage={this.state.errors.signIn}               
             />   
                 
             <AppForm 
@@ -81,7 +113,10 @@ class Auth extends Component{
                 proto={SignUpFormConfig}
                 submitText='SignUp'
                 url={API.singUp}
+                httpMethod='POST'
                 extSubmitHandler={this.onSignUpHandler}
+                errorMessage={this.state.errors.signUp}
+                successMessage={this.state.success.signUp}
             /> 
             </div>
             

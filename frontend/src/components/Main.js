@@ -18,6 +18,10 @@ class Main extends Component{
         this.state = {
             authState: authState,
             inited : false,
+            errors : {
+                        projects : [],
+                        users : [],
+                     },
             projects : [],
             users : []
         };
@@ -56,8 +60,6 @@ class Main extends Component{
 
     }
 
-
-
     componentDidMount(){    
         if(this.state.authState === true) {
             this.fetchProjects();
@@ -65,42 +67,69 @@ class Main extends Component{
         }
     }
 
-    componentWillUnmount(){
-        //fix fetch after unmount
-        //to call that - click several times at header link
-    }
+    fetchProjects = param => { 
+        let status = true;
+        if(param){
+            console.log(param.status)                   
+            if(param.status === 'OK')
+                status = true
+            else
+                status = false
+        }
+            
 
-    fetchProjects = param => {        
-        fetch(API.selectAllProjects)
-            .then(res => res.json())
-            .then(                    
-                    (res) => {                          
-                        if(res.length > 0)
-                            this.setState({
-                                inited : true, 
-                                projects : res,
-                            });                        
-                    },                
-                    (error) => { console.log('error')}
-            );
+        if(status === true){
+            fetch(API.selectAllProjects)
+                .then(res => res.json())
+                .then(                    
+                        (res) => {                          
+                            if(res.length > 0)
+                                this.setState({
+                                    inited : true, 
+                                    projects : res,
+                                });                        
+                        },                
+                        (error) => { console.log('error')}
+                );
+        }else{            
+            const errors = this.state.errors
+            errors.projects = param.errors;
+            this.setState({ errors : errors })
+        }
     }
 
     fetchUsers = param =>{        
-        fetch(API.selectAllUsers)
-        .then( res => res.json())
-        .then(
-            res =>{
-                if(res.length > 0)
-                this.setState({
-                    inited : true, 
-                    users : res,
-                });                        
-            },
-            error => { console.log('error') }
-        );
+        let status = true;
+        if(param){
+            console.log(param.status)                   
+            if(param.status === 'OK')
+                status = true
+            else
+                status = false
+        }
+
+        if(status === true){
+            fetch(API.selectAllUsers)
+            .then( res => res.json())
+            .then(
+                res =>{
+                    if(res.length > 0)
+                    this.setState({
+                        inited : true, 
+                        users : res,
+                    });                        
+                },
+                error => { console.log('error') }
+            );
+        }else{            
+            const errors = this.state.errors
+            errors.users = param.errors;
+            this.setState({ errors : errors })
+        }
     }
 
     render(){  
+        console.log('Main state: ', this.state)
         
         if(this.state.authState !== true){
             return <Redirect push to='/auth' />
@@ -121,6 +150,7 @@ class Main extends Component{
                             proto={ProjectFormConfig} 
                             submitText="Save Project" 
                             extSubmitHandler={this.fetchProjects}                
+                            errorMessage={this.state.errors.projects}
                             />                 
                         <AppForm
                             id='CreateDeveloper'                         
@@ -131,6 +161,7 @@ class Main extends Component{
                             proto={CreateDeveloperFormConfig}
                             submitText="Create" 
                             extSubmitHandler={this.fetchUsers}                
+                            errorMessage={this.state.errors.users}
                             />
                     </div>
                 </div>

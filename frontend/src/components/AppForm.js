@@ -3,9 +3,13 @@ import LabeledInput from './LabeledInput'
 
 /*
 id
+mainClassName
+additionalClassName
+url
+httpMethod
 proto
 submitText
-url
+extSubmitHandler
 */
 
 class AppForm extends Component{
@@ -21,6 +25,7 @@ class AppForm extends Component{
         this.props.proto.forEach( elem => {
             this.state[elem.id] = elem.text           
         })
+        console.log('Form Constructor')
     }
 
     changeHandle = event => {
@@ -49,8 +54,7 @@ class AppForm extends Component{
         })
     }
 
-    render() {
-        
+    render() {        
         return (
             <div className={this.props.mainClassName+' '+this.props.additionalClassName}  >
                 <form id={this.props.id} onChange={this.changeHandle} onSubmit={this.submitHandle}>
@@ -67,6 +71,18 @@ class AppForm extends Component{
                             <input type="submit" value={this.props.submitText} className='submitButton'/>
                         :
                             ''
+                    }
+                    {
+                        this.props.errorMessage ?                         
+                        this.props.errorMessage.map( errorText => {return <div>{errorText}</div>})
+                        :
+                        <></>
+                    }
+                    {
+                        this.props.successMessage ?                         
+                        this.props.successMessage.map( errorText => {return <div>{errorText}</div>})
+                        :
+                        <></>
                     }
                 </form>
             </div>
