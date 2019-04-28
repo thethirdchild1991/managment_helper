@@ -1,6 +1,7 @@
 # managment_helper
 
 Tool for task control.
+DONE:
 
 Pages:
 	SignIn/SignUp page - #done
@@ -10,6 +11,7 @@ Pages:
 	user profile for user - #nope
 
 
+TODO:
 Features:
 	-guest view
 	-login/log out
