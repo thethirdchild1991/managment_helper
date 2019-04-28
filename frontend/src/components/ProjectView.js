@@ -4,7 +4,7 @@ import {
   } from "react-router-dom";
 import {API} from '../configs/APISettings'
 import AppForm from './AppForm'
-import editUserFormConfig from '../configs/editUserFormConfig'
+
 
 class ProjectView extends Component{
     constructor(props){
@@ -18,6 +18,7 @@ class ProjectView extends Component{
             params : params,
             path :  this.props.path,
             proto : this.props.proto,
+            errors: [],
         }
     }
 
@@ -31,8 +32,19 @@ class ProjectView extends Component{
         }
     }
 
-    fetchElem = () => {
-        console.log('fetching')                
+    saveHandler = (params) => {
+        console.log('saveHandler: ', params)
+        if(params.status === 'Fail'){
+            this.setState({ 
+                errors : params.errors,            
+            })
+        }else{
+            this.fetchElem()
+        }
+    }
+
+    fetchElem =  ( params ) => {
+        console.log('fetching : ', params)                
         fetch(
             this.state.path.fetch+`?id=${this.state.params.id}`                
         )
@@ -57,7 +69,7 @@ class ProjectView extends Component{
     
 
     deleteHandler = event =>{
-        console.log('Delete Handler: ', this.state.data._id)
+        console.log('Delete Handler: ', this.state.data._id, this.props.path.delete)
         fetch(
             this.props.path.delete,
             {
@@ -117,14 +129,17 @@ class ProjectView extends Component{
                         {this.state.showEditForm === true ? 
                             <div className="formWrapper">
                                 <AppForm
-                                id='EditUser'                         
-                                mainClassName='EditUser'
-                                additionalClassName=''
-                                url={this.state.path.edit}
-                                httpMethod='PUT'
-                                proto={this.state.proto}
-                                submitText="Save" 
-                                extSubmitHandler={this.fetchElem}                
+                                    id='EditUser'                         
+                                    mainClassName='EditUser'
+                                    additionalClassName=''
+                                    url={this.state.path.edit}
+                                    httpMethod='PUT'
+                                    proto={this.state.proto}
+                                    submitText="Save" 
+                                    extSubmitHandler={this.saveHandler}                
+                                    errorMessage={this.state.errors}
+                                    // successMessage={}
+                                    extID={  this.state.data._id }
                                 />
                             </div>
                             :

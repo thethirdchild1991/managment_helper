@@ -10,6 +10,9 @@ httpMethod
 proto
 submitText
 extSubmitHandler
+errorMessage
+successMessage
+extConsts
 */
 
 class AppForm extends Component{
@@ -19,8 +22,16 @@ class AppForm extends Component{
         this._url = props.url
         this.extSubmitHandler=props.extSubmitHandler
         this.httpMethod = props.httpMethod
-        this.state = {
-            loggedIn : false
+        if(this.props.extID){
+            // const extConsts = this.props.extConsts
+            this.state = {
+                loggedIn : false,
+                id : this.props.extID
+            }
+        }else{
+            this.state = {
+                loggedIn : false            
+            }
         }
         this.props.proto.forEach( elem => {
             this.state[elem.id] = elem.text           

@@ -50,7 +50,7 @@ class App extends Component {
                                     path={{
                                             fetch : API.selectProject,
                                             edit : API.updateProject,
-                                            delete : API.delenpmteProject,
+                                            delete : API.deleteProject,
                                           }}
                                     proto={editProjectFormConfig}
                                   /> }              
