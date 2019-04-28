@@ -84,18 +84,24 @@ router.post('/:action/:target', (req, res, next) => {
 router.put('/:action/:target', (req, res, next) => {    
     const action = req.params.action
     const target = req.params.target
-    const id = req.body.id        
+    const id = req.body.id 
+    console.log(req.body)       
 
     if( action === 'update'){        
         Models[target].findByIdAndUpdate(
             id,
-            {$set:{client : 'req.body.client'}},
-            {new : true},
+            {$set: req.body},
+            {
+                new : true,
+                runValidators: true,
+                context: 'query',
+            },
             (err, doc) =>{
                 if(err){
-                    console.log(err)
+                    console.log('errors: ', err)
+                    res.json({'status': 'Fail',  errors : Object.keys(err.errors) })
                 }else{   
-                    console.log(doc)                 
+                    console.log('updated: ', doc)                 
                     res.json(doc)
                 }
             }
