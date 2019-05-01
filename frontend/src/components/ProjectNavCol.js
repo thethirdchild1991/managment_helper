@@ -18,7 +18,7 @@ class ProjectNavCol extends Component{
                                 return (
                                     <li key={elem._id}>
                                         <Link to={`project/${elem._id}`}>
-                                            {elem._id}
+                                            {elem.project}
                                         </Link>
                                     </li>
                                 )

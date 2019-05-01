@@ -7,17 +7,21 @@ class TableView extends Component{
                     <thead>
                         <tr>
                         { 
-                            Object.keys(this.props.data[0]).map( key => {                    
-                                // const [key, value] = pair;
+                            // Object.keys(this.props.data[0]).map( key => {                    
+                            //     // const [key, value] = pair;
+                            //     return <th key={key}>{key}</th>;
+                            // }) 
+                            this.props.dataKeys.map( key => {
                                 return <th key={key}>{key}</th>;
-                            }) 
+                            })                           
+
                         }
                         </tr>
                     </thead>
                     <tbody>
                     { 
                         this.props.data.map( elem => {
-                            return <TableRowElem data={elem} linkedColumn='_id' path={this.props.path}/>
+                            return <TableRowElem data={elem} keys={this.props.dataKeys} linkedColumn='_id' path={this.props.path}/>
                         }) 
                     }
                     </tbody>

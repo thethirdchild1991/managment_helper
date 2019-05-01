@@ -6,7 +6,7 @@ class MainLogo extends Component{
             <div id="mainLogo">
                 {/* <a href="index">                 */}
                 <Link to="/">
-                    <img src="http://ardeonova.com/sites/all/themes/riftek/logo.png" alt="logo"/>
+                    <img src="http://ardeonova.com/sites/all/themes/riftek/logo.png" alt="LOGO"/>
                 {/* </a> */}
                 </Link>
             </div>  

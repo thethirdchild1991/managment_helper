@@ -10,6 +10,8 @@ import CreateDeveloperFormConfig from '../configs/CreateDeveloperFormConfig'
 import AppForm from './AppForm'
 import ProjectNavCol from './ProjectNavCol'
 import {API} from '../configs/APISettings'
+import {projectKeys} from '../configs/projectTableConfig'
+import {userKeys} from '../configs/userTableConfig'
 
 class Main extends Component{
     constructor(props){
@@ -42,7 +44,11 @@ class Main extends Component{
 
     ProjectTableOnState = () => {        
         return  this.state.projects.length > 0 ?                                                                                 
-                    <TableView data = {this.state.projects} path='project'/>
+                    <TableView 
+                        data={this.state.projects} 
+                        dataKeys={projectKeys}
+                        path='project'
+                    />
                     :
                     guestContent.map( elem => {
                         return (
@@ -55,7 +61,11 @@ class Main extends Component{
 
     UsersTableOnState = () => {
         return  this.state.users.length > 0 ?
-                    <TableView data = {this.state.users} path='user'/>
+                    <TableView 
+                        data = {this.state.users}                         
+                        dataKeys={userKeys}
+                        path='user'
+                    />
                 : <></>
 
     }

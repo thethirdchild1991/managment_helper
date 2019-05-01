@@ -10,6 +10,8 @@ import Auth from './Auth'
 import ProjectView from './ProjectView'
 import editUserFormConfig from '../configs/editUserFormConfig'
 import editProjectFormConfig from '../configs/editProjectFormConfig'
+import {projectKeys} from '../configs/projectTableConfig'
+import {userKeys} from '../configs/userTableConfig'
 
 import '../App.css';
 
@@ -47,6 +49,7 @@ class App extends Component {
             path='/project/:id' 
             render = { (param) => <ProjectView 
                                     data={param} 
+                                    dataKeys={projectKeys}
                                     path={{
                                             fetch : API.selectProject,
                                             edit : API.updateProject,
@@ -60,6 +63,7 @@ class App extends Component {
             path='/user/:id' 
             render = { (param) => <ProjectView 
                                     data={param} 
+                                    dataKeys={userKeys}                                    
                                     path={{
                                             fetch : API.selectUser,
                                             edit : API.updateUser,

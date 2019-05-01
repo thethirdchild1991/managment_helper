@@ -15,6 +15,7 @@ class ProjectView extends Component{
             status : 'empty',
             showEditForm : false,
             data : {},
+            dataKeys : this.props.dataKeys,
             params : params,
             path :  this.props.path,
             proto : this.props.proto,
@@ -104,24 +105,33 @@ class ProjectView extends Component{
                             <thead>
                                 <tr>
                                 { 
-                                    Object.keys(this.state.data).map( key => {                    
-                                        // const [key, value] = pair;
-                                        return <th>{key}</th>;
-                                    }) 
+                                    // Object.keys(this.state.data).map( key => {                    
+                                    //     // const [key, value] = pair;
+                                    //     return <th>{key}</th>;
+                                    // }) 
+                                    this.state.dataKeys.map( key => {
+                                      return <th>{key}</th>  
+                                    })
                                 }
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                 { 
-                                    Object.entries(this.state.data).map( entry => {
-                                        return (
-                                        <td>
-                                            {/* <input type="text" defaultValue={entry[1]} id={entry[0]}/>   */}
-                                            {entry[1]}                                      
-                                        </td>
-                                        )
-                                    }) 
+                                    // Object.entries(this.state.data).map( entry => {
+                                    //     return (
+                                    //     <td>
+                                    //         {/* <input type="text" defaultValue={entry[1]} id={entry[0]}/>   */}
+                                    //         {entry[1]}                                      
+                                    //     </td>
+                                    //     )
+                                    // }) 
+                                    this.state.dataKeys.map( key => {
+                                        if(key == 'id')
+                                            return <td>{this.state.data['_id']}</td>
+                                        else
+                                            return <td>{this.state.data[key]}</td>
+                                    })
                                 }
                                 </tr>
                             </tbody>
