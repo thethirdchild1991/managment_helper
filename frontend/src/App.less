@@ -1,0 +1,224 @@
+@empty-body-color: white;
+@header-background-color : #592E83;
+@main-background-color: #331E4D;;
+@nav-background-color: blueviolet;
+
+@mainWrapper-background-color: bisque;;
+@mainWrapper-a-hover-color: green;
+
+@authTypeSelector-active-color: green;
+@authTypeSelector-notActive-color: red;
+@signUp-background-color: brown;
+@signIn-background-color: tomato;
+
+@projectTable-elem-hover-color: red;
+@formWrapper-input-focus-background-color:#9984D4;
+
+
+
+* {
+    margin: 0;
+    padding: 0;
+    border: 0;
+}
+  
+body {
+    color: @empty-body-color;
+}
+
+p{
+    color: black;
+}
+  
+#root {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+    
+header, footer, #nav, #nav ul{  
+display: flex;
+flex-direction: row;
+/* align-items: center; */
+justify-content: center;  
+}
+header{
+    background: @header-background-color;
+    padding: 10px 0;
+}
+nav {
+    background-color: @nav-background-color;
+    color: white;
+    & a{
+        color: white;        
+    }
+}
+
+
+li {
+display: block;
+padding: 0 10px;
+}
+main {
+display: flex;
+flex-grow: 1;
+flex-direction: row;
+justify-content: center;      
+background: @main-background-color;
+}
+
+.main {
+display: flex;
+flex-direction: column;    
+width: max-content;  
+
+}
+
+.MainNavWrapper {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    flex-basis: 0;
+    & nav{
+        display: flex;
+        flex-direction: column;
+        flex-grow: 1;
+        flex-basis: 0;
+        background-color: @mainWrapper-background-color;
+        color: black;
+    }
+    & a{
+        background-color: @mainWrapper-background-color;
+        color: black;
+        display: inline-block;
+        width: 100%;
+        &:hover{
+            background-color: @mainWrapper-a-hover-color;
+        }
+    }
+    & li{
+        padding: 0;
+    }
+}
+
+.formWrapper{
+    display: flex;
+    flex-direction: column;    
+    justify-content: center;
+    & div{
+        display: flex;
+        justify-content: center;  
+        flex-direction: row;
+    }
+}
+
+#ProjectForm div, #CreateDeveloper div, #EditUser div{
+justify-content: space-between;
+}
+
+.authWrapper{
+display: flex;
+flex-direction: column;
+height: max-content;
+}
+
+.authTypeSelector{
+    display: flex;
+    flex-direction: row;   
+    & div{
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;          
+    }
+    & .active{
+        background-color: @authTypeSelector-active-color;
+    }
+    & .notActive{
+        background-color: @authTypeSelector-notActive-color;
+    }
+}
+
+.signIn, .signUp{
+height: max-content;
+padding: 0 10px;
+}
+#signIn div, #signUp div{
+display: flex;
+flex-direction: column;
+padding: 10px 0;
+}
+
+#signIn .submitButton, #signUp .submitButton{
+    background-color: aquamarine;
+}
+
+.submitButton{
+    line-height: 4;
+    width: 100%;
+    margin: 10px 0;
+}
+
+.signUp{
+    background-color: @signUp-background-color;
+}
+.signIn{
+    background-color: @signIn-background-color;
+}
+
+.hidden{
+    display: none;
+}
+
+.projectTable{
+    color: white;
+    background-color: green;
+    width: max-content;
+    border: solid 3px black;
+    border-collapse: collapse;
+    align-self: center;
+    & th,td{
+        border: solid 2px black;        
+    }
+    & tr{
+        &:hover{
+            background-color: @projectTable-elem-hover-color;
+        }
+    }
+
+    & a{
+        display: inline-block;
+        width: 100%;
+        &:hover{
+            background-color:@projectTable-elem-hover-color;
+        }
+    }
+
+}
+
+
+.ProjectEditWrapper {
+    display: flex;
+    flex-direction: row;
+    & input{
+        flex-grow: 1;
+        border: solid 3px black;
+        line-height: 3;
+    }
+}
+
+
+.formWrapper input:focus{
+    background-color: @formWrapper-input-focus-background-color;
+}
+
+footer {
+    background: #9984D4;
+    padding: 10px 0;
+    & a{
+        padding: 0 5px;    
+    }
+}
+
+#NOPE{
+    color:black;
+}
