@@ -26,17 +26,7 @@ UserSchema.plugin(uniqueValidator);
 
 const ProjectModel = mongoose.model('Project', ProjectSchema);
 const UserModel = mongoose.model('User', UserSchema);
-// const TestProject_1 = new Project({ project : 'TestProject_1'});
-// TestProject_1.save();
 
-// Project.find().lean().exec(function(err,docs){
-//     if(err){
-//         console.log(err)
-//     }else{
-//         console.log((JSON.stringify(docs)))
-//         // return res.end(JSON.stringify(docs));
-//     }
-// });
 module.exports.project =  ProjectModel;
 module.exports.user =  UserModel;
 module.exports.ProjectModel =  ProjectModel;
