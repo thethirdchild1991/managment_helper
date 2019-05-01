@@ -9,6 +9,13 @@ body {
 p {
   color: black;
 }
+a {
+  text-decoration: none;
+  color: tomato;
+}
+a:visited {
+  color: tomato;
+}
 #root {
   display: flex;
   flex-direction: column;
@@ -26,6 +33,10 @@ footer,
 header {
   background: #592E83;
   padding: 10px 0;
+  color: green;
+}
+header * {
+  color: green;
 }
 nav {
   background-color: blueviolet;
@@ -156,8 +167,9 @@ main {
   background-color: red;
 }
 .projectTable a {
-  display: inline-block;
+  display: contents;
   width: 100%;
+  color: black;
 }
 .projectTable a:hover {
   background-color: red;

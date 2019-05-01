@@ -12,8 +12,9 @@ class Auth extends Component{
     constructor(props){
         super(props)        
         this.authHandler = props.authHandler
+        const authState = localStorage.getItem('loggedIn')
         this.state = {
-            authState : props.authState,            
+            authState : authState ? authState : false,        
             active : 'signInTab',
             errors :    {
                             signIn : [],
@@ -32,9 +33,10 @@ class Auth extends Component{
         }, () =>{console.log(this.state)})
     }
 
-    onSignInHandler = param =>{ 
-        const AuthStatus = JSON.parse(param.loggedIn)                  
-        if(AuthStatus === true ){
+    onSignInHandler = param =>{   
+        // console.log(param.loggedIn)      
+        const AuthStatus = (param.loggedIn === 'false') ? false : param.loggedIn;
+        if(AuthStatus !== false ){
             localStorage.setItem('loggedIn', AuthStatus)            
             this.setState({authState : AuthStatus})
         }else{
@@ -72,7 +74,7 @@ class Auth extends Component{
 
     render(){       
         
-        if(this.state.authState === true){            
+        if(this.state.authState !== false){            
             console.log('redirect')
             return <Redirect to='/index'/>            
         }        

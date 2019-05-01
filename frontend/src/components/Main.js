@@ -16,9 +16,10 @@ import {userKeys} from '../configs/userTableConfig'
 class Main extends Component{
     constructor(props){
         super(props);           
-        const authState = JSON.parse(localStorage.getItem('loggedIn'))        
+           
+        const authState = localStorage.getItem('loggedIn')
         this.state = {
-            authState: authState,
+            authState: authState ? authState : false,            
             inited : false,
             errors : {
                         projects : [],
@@ -71,7 +72,7 @@ class Main extends Component{
     }
 
     componentDidMount(){    
-        if(this.state.authState === true) {
+        if(this.state.authState !== false) {
             this.fetchProjects();
             this.fetchUsers();
         }
@@ -138,10 +139,9 @@ class Main extends Component{
         }
     }
 
-    render(){  
-        console.log('Main state: ', this.state)
+    render(){          
         
-        if(this.state.authState !== true){
+        if(this.state.authState === false){
             return <Redirect push to='/auth' />
         }
         return (

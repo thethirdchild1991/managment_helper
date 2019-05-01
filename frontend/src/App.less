@@ -1,5 +1,7 @@
 @empty-body-color: white;
+@link-color: tomato;
 @header-background-color : #592E83;
+@header-color: green;
 @main-background-color: #331E4D;;
 @nav-background-color: blueviolet;
 
@@ -29,6 +31,13 @@ body {
 p{
     color: black;
 }
+a{
+    text-decoration: none;
+    color: @link-color;
+    &:visited{
+        color: @link-color
+    }
+}
   
 #root {
     display: flex;
@@ -45,6 +54,10 @@ justify-content: center;
 header{
     background: @header-background-color;
     padding: 10px 0;
+    color: @header-color;
+    & *{
+        color: @header-color;
+    }
 }
 nav {
     background-color: @nav-background-color;
@@ -186,8 +199,9 @@ padding: 10px 0;
     }
 
     & a{
-        display: inline-block;
+        display: contents;
         width: 100%;
+        color:black;//rgb(182, 182, 182);
         &:hover{
             background-color:@projectTable-elem-hover-color;
         }

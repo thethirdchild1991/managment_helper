@@ -18,11 +18,11 @@ import '../App.css';
 class App extends Component {
   constructor(props){
     super(props)  
-    const loggedState = Boolean(localStorage.getItem('loggedIn')) 
+    const loggedState = localStorage.getItem('loggedIn')    
 
     this.state = {
       authState : loggedState ? loggedState : false,
-    }    
+    }       
         
   }
 
