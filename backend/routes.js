@@ -38,8 +38,8 @@ router.post('/signin', (req, res, next) => {
             if(err){
                 console.log('error: ', err)
             }else{
-                if(docs.length === 1){
-                    res.json({loggedIn : 'true',})                    
+                if(docs.length === 1){                    
+                    res.json({loggedIn : docs[0].role,})                    
                 }else{
                     res.json({
                                 loggedIn : 'false', 
