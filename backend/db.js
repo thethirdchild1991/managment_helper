@@ -5,13 +5,15 @@ mongoose.connect('mongodb://localhost:27017/test', {useNewUrlParser: true});
 
 const Schema = mongoose.Schema;
 const ProjectSchema = new Schema({
-    agent               : {type: String, default: 'agent'},// = 'контрагент',
-    client              : {type: String, default: 'client'},// = 'Заказчик',
-    project             : {type: String, default: 'project', unique : true},// = 'Проект',
-    technology          : {type: String, default: 'technology'},// = 'Технологии',
-    status              : {type: String, default: 'status'},// = 'Статус',
-    manager             : {type: String, default: 'manager'},// = 'Менеджер',
-    project_engineer    : {type: String, default: 'project_engineer'},// = 'Проектный инженер',
+    agent               : {type: String,    default: 'agent'},
+    client              : {type: String,    default: 'client'},
+    project             : {type: String,    default: 'project', unique : true},
+    technology          : {type: String,    default: 'technology'},
+    status              : {type: String,    default: 'status'},
+    manager             : {type: String,    default: 'manager'},
+    project_engineer    : {type: String,    default: 'project_engineer'},
+    startDate           : {type: Date,      default: Date.now},
+    deadLine            : {type: Date,      default: Date.now},
 });
 ProjectSchema.plugin(uniqueValidator)
 
