@@ -15,11 +15,13 @@ const ProjectSchema = new Schema({
 });
 ProjectSchema.plugin(uniqueValidator)
 
+
+const ROLES = ['employee', 'developer', 'manager', 'admin'];
 const UserSchema = new Schema({
     username    : {type: String, default: 'username',   unique : true},
     email       : {type: String, default: 'email',      unique : true},
     password    : {type: String, default: 'password'},
-    role        : {type: String, default: 'employee'}    
+    role        : {type: String, default: 'employee',   enum : ROLES}    
 });
 UserSchema.plugin(uniqueValidator);
 
