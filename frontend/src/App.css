@@ -92,7 +92,22 @@ main {
   flex-direction: column;
   justify-content: center;
 }
-.formWrapper div {
+.formWrapper .ProjectForm {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.formWrapper .CreateDeveloper {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.formWrapper .labeledInputWrapper {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.formWrapper .EditUser {
   display: flex;
   justify-content: center;
   flex-direction: row;

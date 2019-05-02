@@ -50,7 +50,7 @@ class Main extends Component{
                         data={this.state.projects} 
                         dataKeys={projectKeys}
                         path='project'
-                        withLink={ROLESobj[this.state.authState].viewProject > 0}
+                        withLink={ROLESobj[this.state.authState].viewProject}
                     />
                     :
                     guestContent.map( elem => {
@@ -63,12 +63,13 @@ class Main extends Component{
     }
 
     UsersTableOnState = () => {
+        console.log(ROLESobj[this.state.authState].editRole)
         return  this.state.users.length > 0 ?
                     <TableView 
                         data = {this.state.users}                         
                         dataKeys={userKeys}
                         path='user'
-                        withLink={ROLESobj[this.state.authState].editRole > 0}
+                        withLink={ROLESobj[this.state.authState].editRole}
                     />
                 : <></>
 
@@ -96,7 +97,8 @@ class Main extends Component{
             fetch(API.selectAllProjects)
                 .then(res => res.json())
                 .then(                    
-                        (res) => {                          
+                        (res) => {
+                            console.log(res)                          
                             if(res.length > 0)
                                 this.setState({
                                     inited : true, 

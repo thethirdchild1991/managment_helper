@@ -1,5 +1,5 @@
 const employeePermitions = {
-    viewProjectsTable : true
+    viewProjectsTable : true,    
 }
 const developerPermitions = Object.create(employeePermitions,{
     viewProject : {

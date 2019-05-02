@@ -14,6 +14,7 @@ import {projectKeys} from '../configs/projectTableConfig'
 import {userKeys} from '../configs/userTableConfig'
 
 import '../App.css';
+import "react-datepicker/dist/react-datepicker.css";
 
 class App extends Component {
   constructor(props){
@@ -56,6 +57,8 @@ class App extends Component {
                                             delete : API.deleteProject,
                                           }}
                                     proto={editProjectFormConfig}
+                                    showDetails={true}
+                                    editPermition={'editProject'}
                                   /> }              
           />
           <Route 
@@ -70,6 +73,8 @@ class App extends Component {
                                             delete : API.deleteUser,
                                           }}
                                     proto={editUserFormConfig}
+                                    showDetails={false}
+                                    editPermition={'editRole'}
                                     /> }   
           />
           <Route component={NOPE} />

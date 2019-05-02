@@ -30,7 +30,7 @@ class Auth extends Component{
     onClickHandler = event => {
         this.setState({
             active : event.target.id
-        }, () =>{console.log(this.state)})
+        })
     }
 
     onSignInHandler = param =>{   

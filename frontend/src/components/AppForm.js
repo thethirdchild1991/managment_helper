@@ -22,8 +22,7 @@ class AppForm extends Component{
         this._url = props.url
         this.extSubmitHandler=props.extSubmitHandler
         this.httpMethod = props.httpMethod
-        if(this.props.extID){
-            // const extConsts = this.props.extConsts
+        if(this.props.extID){            
             this.state = {
                 loggedIn : false,
                 id : this.props.extID
@@ -36,23 +35,20 @@ class AppForm extends Component{
         this.props.proto.forEach( elem => {
             this.state[elem.id] = elem.defaultValue           
         })
-        console.log('Form Constructor')
+        
     }
 
     changeHandle = event => {
         event.preventDefault();
         this.setState({
             [event.target.id] : event.target.value
-        })
-        
-        console.log('form change handler: ', this.state)
-        
+        })        
     }
 
     submitHandle = event => {
-        event.preventDefault();  
-        console.log('submitHandler: ', this._url, this.state)     
-        
+        event.preventDefault();          
+        console.log(this.state.startDate)
+        console.log( Date(this.state.startDate) )
         fetch(
             this._url,
             {
@@ -67,15 +63,20 @@ class AppForm extends Component{
             }            
         })
     }
+    dateChangeHandler = ( value ) => {
+        console.log( value )
+        this.setState( value )
+    }
 
-    render() {        
+    render() { 
+        console.log(this.state)       
         return (
             <div className={this.props.mainClassName+' '+this.props.additionalClassName}  >
                 <form id={this.props.id} onChange={this.changeHandle} onSubmit={this.submitHandle}>
                     {
                         this.props.proto ?
                             this.props.proto.map( element => {
-                                return <LabeledInput key={element.id} params={element} />
+                                return <LabeledInput key={element.id} params={element} dateOnChangeHandler={this.dateChangeHandler}/>
                             })
                         :
                             ''

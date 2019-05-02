@@ -47,7 +47,21 @@ const editProjectFormConfig = [
         id: 'project_engineer',
         value: '',
         required: true,
-    }
+    },
+    {
+        LabelText:'startDate',   
+        defaultValue: Date.now(),     
+        id: 'startDate',
+        type: Date,
+        required: true
+    },
+    {         
+        LabelText:'deadLine',   
+        defaultValue: Date.now(),     
+        id: 'deadLine',
+        type: Date,
+        required: true
+    },
     
 ]
 export default editProjectFormConfig;

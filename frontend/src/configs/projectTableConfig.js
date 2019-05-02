@@ -6,4 +6,6 @@ export const projectKeys = [
     'status',            
     'manager',           
     'project_engineer', 
+    'startDate',
+    'deadLine'
 ]
