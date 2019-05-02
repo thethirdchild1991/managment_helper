@@ -1,42 +1,49 @@
 const editProjectFormConfig = [
-    {
-        text:'agent',        
+    {        
+        LabelText:'agent',   
+        defaultValue: 'agent',            
         id: 'agent',        
         value : '',
         required: true,
     },
-    {
-        text: 'client',
+    {        
+        LabelText:'client',   
+        defaultValue: 'client',     
         id: 'client',
         value: '',
         required: true,
     },
     {
-        text: 'project',
+        LabelText:'project',   
+        defaultValue: 'project',     
         id: 'project',
         value: '',
         required: true,
     },
     {
-        text: 'technology',
+        LabelText:'technology',   
+        defaultValue: 'technology',     
         id: 'technology',
         value: '',
         required: true,
     },
     {
-        text: 'status',
+        LabelText:'status',   
+        defaultValue: 'status',     
         id: 'status',
         value: '',
         required: true,
     },
     {
-        text: 'manager',
+        LabelText:'manager',   
+        defaultValue: 'manager',     
         id: 'manager',
         value: '',
         required: true,
     },
     {
-        text: 'project_engineer',
+        LabelText:'project_engineer',   
+        defaultValue: 'project_engineer',     
         id: 'project_engineer',
         value: '',
         required: true,

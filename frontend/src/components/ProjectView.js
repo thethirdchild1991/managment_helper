@@ -64,8 +64,14 @@ class ProjectView extends Component{
     }
 
     editHandler = event => {
-        this.setState({ showEditForm : true })
-        console.log('Edit Handler')
+        let tmpProto = this.state.proto;
+        tmpProto = tmpProto.map(element => {
+            element.defaultValue = this.state.data[element.id]            
+            return element;
+        });        
+        this.setState({ 
+            showEditForm : true ,            
+        })        
     }
     
 

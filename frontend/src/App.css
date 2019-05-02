@@ -167,7 +167,7 @@ main {
   background-color: red;
 }
 .projectTable a {
-  display: contents;
+  display: block;
   width: 100%;
   color: black;
 }

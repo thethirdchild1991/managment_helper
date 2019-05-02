@@ -55,17 +55,23 @@ class Auth extends Component{
         if(param.status === 'OK'){
             status = true;
             const success = this.state.success
-            success.signUp = ['Done']            
+            success.signUp = ['Done']    
+            const errors = this.state.errors
+            errors.signUp = []   
             this.setState({ 
                             success : success,                            
+                            errors : errors
                         })
 
         }else{
             status = false;
             const errors = this.state.errors
             errors.signUp = param.errors;                        
+            const success = this.state.success
+            success.signUp = []    
             this.setState({ 
                             errors : errors,
+                            success : success,                            
                             authState : false
                         })
         }

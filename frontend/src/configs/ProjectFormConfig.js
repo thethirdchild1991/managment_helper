@@ -1,37 +1,44 @@
 const ProjectFormConfig = [
-    {
-        text:'agent',        
-        id: 'pro_agent',
+    {        
+        LabelText:'agent',   
+        defaultValue: 'agent',     
+        id: 'agent',
         required: true
     },
-    {
-        text:'customer',        
-        id: 'pro_customer',
+    {                
+        LabelText:'customer',   
+        defaultValue: 'customer',     
+        id: 'customer',
         required: true
     },
-    {
-        text:'project',        
-        id: 'pro_project',
+    {         
+        LabelText:'project',   
+        defaultValue: 'project',     
+        id: 'project',
         required: true
     },
-    {
-        text:'technology',        
-        id: 'pro_technology',
+    {         
+        LabelText:'technology',   
+        defaultValue: 'technology',     
+        id: 'technology',
         required: true
     },
-    {
-        text:'status',        
-        id: 'pro_status',
+    {         
+        LabelText:'status',   
+        defaultValue: 'status',     
+        id: 'status',
         required: true
     },
-    {
-        text:'manager',        
-        id: 'pro_manager',
+    {         
+        LabelText:'manager',   
+        defaultValue: 'manager',     
+        id: 'manager',
         required: true
     },
-    {
-        text:'engineer',        
-        id: 'pro_engineer',
+    {         
+        LabelText:'engineer',   
+        defaultValue: 'engineer',     
+        id: 'engineer',
         required: true
     },
 

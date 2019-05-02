@@ -1,11 +1,13 @@
 const SignInFormConfig = [
-    {
-        text:'username',        
+    {         
+        LabelText:'username',   
+        defaultValue: 'username',     
         id: 'username',
         required: true
     },
     {
-        text:'password',        
+        LabelText:'password',   
+        defaultValue: 'password',     
         id: 'password',
         required: true
     },    

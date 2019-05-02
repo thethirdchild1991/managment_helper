@@ -21,7 +21,13 @@ class TableView extends Component{
                     <tbody>
                     { 
                         this.props.data.map( elem => {
-                            return <TableRowElem data={elem} keys={this.props.dataKeys} linkedColumn='_id' path={this.props.path}/>
+                            return <TableRowElem 
+                                        data={elem} 
+                                        keys={this.props.dataKeys} 
+                                        linkedColumn='_id' 
+                                        path={this.props.path}
+                                        withLink={this.props.withLink}
+                                    />
                         }) 
                     }
                     </tbody>

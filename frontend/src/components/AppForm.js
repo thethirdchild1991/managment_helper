@@ -34,7 +34,7 @@ class AppForm extends Component{
             }
         }
         this.props.proto.forEach( elem => {
-            this.state[elem.id] = elem.text           
+            this.state[elem.id] = elem.defaultValue           
         })
         console.log('Form Constructor')
     }
@@ -44,11 +44,14 @@ class AppForm extends Component{
         this.setState({
             [event.target.id] : event.target.value
         })
+        
+        console.log('form change handler: ', this.state)
+        
     }
 
     submitHandle = event => {
         event.preventDefault();  
-        console.log('submitHandler: ', this._url)     
+        console.log('submitHandler: ', this._url, this.state)     
         
         fetch(
             this._url,

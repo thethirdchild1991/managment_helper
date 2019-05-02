@@ -1,19 +1,29 @@
 const editUserFormConfig = [
-    {
-        text:'username',        
+    {        
+        LabelText:'username',   
+        defaultValue: 'username',     
         id: 'username',        
         value : '',
         required: true,
     },
-    {
-        text: 'email',
+    {        
+        LabelText:'email',   
+        defaultValue: 'email',     
         id: 'email',
         value: '',
         required: true,
     },
-    {
-        text: 'password',
+    {        
+        LabelText:'password',   
+        defaultValue: 'password',     
         id: 'password',
+        value: '',
+        required: true,
+    },
+    {        
+        LabelText:'role',   
+        defaultValue: 'employee',     
+        id: 'role',
         value: '',
         required: true,
     }

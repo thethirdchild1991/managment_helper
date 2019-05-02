@@ -1,7 +1,7 @@
 export const projectKeys = [    
+    'project',
     'agent',          
-    'client',            
-    'project',           
+    'client',  
     'technology',
     'status',            
     'manager',           

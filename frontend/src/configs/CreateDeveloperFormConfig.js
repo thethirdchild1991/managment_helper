@@ -1,19 +1,28 @@
 const CreaterDeveloperFormConfig = [
     {
-        text:'username',        
+        LabelText:'username',   
+        defaultValue: 'username',     
         id: 'username',
         required: true
     },
     {
-        text:'password',        
+        LabelText:'password',    
+        defaultValue: 'password',    
         id: 'password',
         required: true
     },    
     {
-        text:'email',        
+        LabelText:'email',       
+        defaultValue: 'email', 
         id: 'email',
         required: true
-    },    
+    },   
+    {
+        LabelText: 'role',
+        defaultValue: 'employee',
+        id: 'role',
+        required :true
+    },
 
 ];
 
