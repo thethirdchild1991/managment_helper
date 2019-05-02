@@ -12,6 +12,7 @@ import ProjectNavCol from './ProjectNavCol'
 import {API} from '../configs/APISettings'
 import {projectKeys} from '../configs/projectTableConfig'
 import {userKeys} from '../configs/userTableConfig'
+import {ROLESobj} from '../configs/userRolesConfig'
 
 class Main extends Component{
     constructor(props){
@@ -43,12 +44,13 @@ class Main extends Component{
                     });        
     }
 
-    ProjectTableOnState = () => {        
+    ProjectTableOnState = () => {                
         return  this.state.projects.length > 0 ?                                                                                 
                     <TableView 
                         data={this.state.projects} 
                         dataKeys={projectKeys}
                         path='project'
+                        withLink={ROLESobj[this.state.authState].viewProject > 0}
                     />
                     :
                     guestContent.map( elem => {
@@ -66,6 +68,7 @@ class Main extends Component{
                         data = {this.state.users}                         
                         dataKeys={userKeys}
                         path='user'
+                        withLink={ROLESobj[this.state.authState].editRole > 0}
                     />
                 : <></>
 
@@ -98,6 +101,7 @@ class Main extends Component{
                                 this.setState({
                                     inited : true, 
                                     projects : res,
+                                    errors : [],
                                 });                        
                         },                
                         (error) => { console.log('error')}
@@ -128,6 +132,7 @@ class Main extends Component{
                     this.setState({
                         inited : true, 
                         users : res,
+                        errors: []
                     });                        
                 },
                 error => { console.log('error') }
@@ -148,20 +153,37 @@ class Main extends Component{
             <main id="main">
                 {this.ProjectNavBarOnState()}  
                 <div className="main">
-                    {this.ProjectTableOnState()}
-                    {this.UsersTableOnState()}
+                    {
+                        ROLESobj[this.state.authState].viewProjectsTable === true ? 
+                            this.ProjectTableOnState() 
+                        : 
+                            <></>
+                    }
+                    {
+                        ROLESobj[this.state.authState].viewUsersTable === true ?
+                            this.UsersTableOnState()
+                        :
+                            <></>
+                    }
                     <div className="formWrapper">
-                        <AppForm
-                            id='ProjectForm'
-                            mainClassName='ProjectForm'                    
-                            additionalClassName=''
-                            url={API.createProject}
-                            httpMethod='POST'
-                            proto={ProjectFormConfig} 
-                            submitText="Save Project" 
-                            extSubmitHandler={this.fetchProjects}                
-                            errorMessage={this.state.errors.projects}
-                            />                 
+                    {
+                        ROLESobj[this.state.authState].createProject === true ?
+                            <AppForm
+                                id='ProjectForm'
+                                mainClassName='ProjectForm'                    
+                                additionalClassName=''
+                                url={API.createProject}
+                                httpMethod='POST'
+                                proto={ProjectFormConfig} 
+                                submitText="Save Project" 
+                                extSubmitHandler={this.fetchProjects}                
+                                errorMessage={this.state.errors.projects}
+                                />                 
+                            : 
+                                <></> 
+                    }
+                    {
+                        ROLESobj[this.state.authState].createUser === true ?
                         <AppForm
                             id='CreateDeveloper'                         
                             mainClassName='CreateDeveloper'
@@ -173,6 +195,9 @@ class Main extends Component{
                             extSubmitHandler={this.fetchUsers}                
                             errorMessage={this.state.errors.users}
                             />
+                            :
+                            <></>
+                    }
                     </div>
                 </div>
                 <div className='MainNavWrapper'>                   
