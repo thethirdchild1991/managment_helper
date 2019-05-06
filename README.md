@@ -11,37 +11,36 @@ Pages:
 	user profile for user - #nope
 
 
+roles:
+	-guest
+		#login, sigup	
+	-employee
+		#logout			
+		#view projects table
+	-dev
+		#employee role
+		#view project				
+		#create project posts
+		edit self posts
+		view, edit self profile :( except role )
+	-manager		
+		#dev role	
+		#create project 
+		create,edit,delete projects posts
+		edit project: 
+			status
+			involved
+			involved roles
+			some details
+		#viewUsersTable
+		#viewUsersProfile
+	-admin 
+		#manager role
+		add users to system
+		edit user roles
+		remove users
+
 TODO:
-
-	roles:
-		-guest
-			login, sigup	
-		-employee
-			logout			
-			view projects table
-		-dev
-			employee role
-			view project:
-				detail
-				status
-				collaborators
-			view, edit self profile :( except role )
-		-manager		
-			dev role	
-			create project 
-			edit project: 
-				status
-				involved
-				involved roles
-				some details
-			viewUsersTable
-			viewUsersProfile
-		-admin 
-			manager role
-			add users to system
-			edit user roles
-			remove users
-
 
 Features:
 	-guest view
