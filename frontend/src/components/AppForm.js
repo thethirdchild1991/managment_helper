@@ -25,7 +25,8 @@ class AppForm extends Component{
         if(this.props.extID){            
             this.state = {
                 loggedIn : false,
-                id : this.props.extID
+                id : this.props.extID,
+                username : '',
             }
         }else{
             this.state = {
@@ -46,9 +47,8 @@ class AppForm extends Component{
     }
 
     submitHandle = event => {
-        event.preventDefault();          
-        console.log(this.state.startDate)
-        console.log( Date(this.state.startDate) )
+        event.preventDefault();    
+        console.log('AppForm: ', this.state)              
         fetch(
             this._url,
             {
@@ -59,7 +59,7 @@ class AppForm extends Component{
         ).then( res => res.json() )
         .then( res =>{
             if(this.extSubmitHandler){                      
-                this.extSubmitHandler(res)
+                this.extSubmitHandler(res, this.state)
             }            
         })
     }

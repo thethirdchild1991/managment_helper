@@ -19,8 +19,12 @@ class Main extends Component{
         super(props);           
            
         const authState = localStorage.getItem('loggedIn')
+        const username = localStorage.getItem('username')
+        const password = localStorage.getItem('password')
         this.state = {
-            authState: authState ? authState : false,            
+            authState: authState ? authState : false,    
+            username : username, 
+            password : password,       
             inited : false,
             errors : {
                         projects : [],
@@ -94,7 +98,8 @@ class Main extends Component{
             
 
         if(status === true){
-            fetch(API.selectAllProjects)
+            fetch(API.selectAllProjects+`?username=${this.state.username}` 
+            )
                 .then(res => res.json())
                 .then(                    
                         (res) => {
@@ -153,7 +158,7 @@ class Main extends Component{
         }
         return (
             <main id="main">
-                {this.ProjectNavBarOnState()}  
+                {/* {this.ProjectNavBarOnState()}   */}
                 <div className="main">
                     {
                         ROLESobj[this.state.authState].viewProjectsTable === true ? 
@@ -202,8 +207,8 @@ class Main extends Component{
                     }
                     </div>
                 </div>
-                <div className='MainNavWrapper'>                   
-                </div>
+                {/* <div className='MainNavWrapper'>                   
+                </div> */}
             </main>
             
         );

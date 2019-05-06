@@ -13,4 +13,6 @@ export const API = {
     updateUser : APIAddr+'/update/user',
     deleteUser : APIAddr+'/delete/user',
     createDeveloper: APIAddr+'/create/user',
+    fetchPostsData : APIAddr+'/select/posts',
+    savePostData : APIAddr+'/create/post',
 }

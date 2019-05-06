@@ -112,6 +112,15 @@ main {
   justify-content: center;
   flex-direction: row;
 }
+.formWrapper .Post {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+}
+.formWrapper textarea {
+  width: 300px;
+  height: 200px;
+}
 #ProjectForm div,
 #CreateDeveloper div,
 #EditUser div {
@@ -188,6 +197,20 @@ main {
 }
 .projectTable a:hover {
   background-color: red;
+}
+.PostElement {
+  display: flex;
+  flex-direction: column;
+  border: solid 2px black;
+}
+.PostElement .postHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  background-color: #2515b4;
+}
+.PostElement .postText {
+  background-color: #4237aa;
 }
 .ProjectEditWrapper {
   display: flex;

@@ -5,6 +5,12 @@ const developerPermitions = Object.create(employeePermitions,{
     viewProject : {
         value : true
     },
+    creatPosts : {
+        value : true
+    },
+    editSelftPost : {
+        value:true
+    },
     viewSelfProfile : {
         value : true
     },
@@ -17,6 +23,9 @@ const managerPermitions = Object.create(developerPermitions, {
         value : true
     },
     createProject : {
+        value : true
+    },
+    editPosts : {
         value : true
     },
     viewUsersTable : {

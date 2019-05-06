@@ -55,9 +55,11 @@ class App extends Component {
                                             fetch : API.selectProject,
                                             edit : API.updateProject,
                                             delete : API.deleteProject,
+                                            fetchPostsData : API.fetchPostsData,
+                                            savePost : API.savePostData
                                           }}
                                     proto={editProjectFormConfig}
-                                    showDetails={true}
+                                    showPosts={true}
                                     editPermition={'editProject'}
                                   /> }              
           />
@@ -72,8 +74,7 @@ class App extends Component {
                                             edit : API.updateUser,
                                             delete : API.deleteUser,
                                           }}
-                                    proto={editUserFormConfig}
-                                    showDetails={false}
+                                    proto={editUserFormConfig}                                    
                                     editPermition={'editRole'}
                                     /> }   
           />

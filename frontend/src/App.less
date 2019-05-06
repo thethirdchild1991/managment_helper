@@ -2,10 +2,10 @@
 @link-color: tomato;
 @header-background-color : #592E83;
 @header-color: green;
-@main-background-color: #331E4D;;
+@main-background-color: #331E4D;
 @nav-background-color: blueviolet;
 
-@mainWrapper-background-color: bisque;;
+@mainWrapper-background-color: bisque;
 @mainWrapper-a-hover-color: green;
 
 @authTypeSelector-active-color: green;
@@ -15,6 +15,11 @@
 
 @projectTable-elem-hover-color: red;
 @formWrapper-input-focus-background-color:#9984D4;
+
+@border-color: black;
+
+@postHeader-background-color: rgb(37, 21, 180);
+@postText-background-color: rgb(66, 55, 170);
 
 
 
@@ -138,6 +143,15 @@ width: max-content;
         justify-content: center;  
         flex-direction: row;
     }
+    & .Post{
+        display: flex;
+        justify-content: center;  
+        flex-direction: row;
+    }
+    & textarea {
+        width : 300px;
+        height : 200px;
+    }
 }
 
 #ProjectForm div, #CreateDeveloper div, #EditUser div{
@@ -201,11 +215,11 @@ padding: 10px 0;
     color: white;
     background-color: green;
     width: max-content;
-    border: solid 3px black;
+    border: solid 3px @border-color;
     border-collapse: collapse;
     align-self: center;
     & th,td{
-        border: solid 2px black;        
+        border: solid 2px @border-color;
     }
     & tr{
         &:hover{
@@ -221,9 +235,23 @@ padding: 10px 0;
             background-color:@projectTable-elem-hover-color;
         }
     }
-
 }
 
+
+.PostElement{
+    display: flex;
+    flex-direction: column;
+    border: solid 2px @border-color;
+    & .postHeader{
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        background-color: @postHeader-background-color;
+    }
+    & .postText{
+        background-color: @postText-background-color;
+    }
+}
 
 .ProjectEditWrapper {
     display: flex;

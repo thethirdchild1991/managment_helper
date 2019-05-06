@@ -14,7 +14,9 @@ class Auth extends Component{
         this.authHandler = props.authHandler
         const authState = localStorage.getItem('loggedIn')
         this.state = {
-            authState : authState ? authState : false,        
+            authState : authState ? authState : false,    
+            username : '', 
+            password : '',   
             active : 'signInTab',
             errors :    {
                             signIn : [],
@@ -33,12 +35,17 @@ class Auth extends Component{
         })
     }
 
-    onSignInHandler = param =>{   
-        // console.log(param.loggedIn)      
+    onSignInHandler = (param, state) =>{    
         const AuthStatus = (param.loggedIn === 'false') ? false : param.loggedIn;
         if(AuthStatus !== false ){
             localStorage.setItem('loggedIn', AuthStatus)            
-            this.setState({authState : AuthStatus})
+            localStorage.setItem('username', state.username)
+            localStorage.setItem('password', state.password)
+            this.setState({
+                authState : AuthStatus,
+                username : state.username,
+                password : state.password,
+            })
         }else{
             localStorage.setItem('loggedIn', false)            
             const errors = this.state.errors

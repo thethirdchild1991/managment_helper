@@ -30,7 +30,17 @@ class LabeledInput extends Component{
                 {this.props.params.BR === true ? <br /> : ''}
                 
 
-                { this.props.params.type === Date ? 
+                {
+                    this.props.params.type === 'textarea' ?
+                    <textarea 
+                        id={this.props.params.id}
+                        required={this.props.params.required}
+                    >
+
+                    </textarea>
+                    :               
+
+                    this.props.params.type === Date ? 
                     <DatePicker
                         selected={this.state.Date}
                         onChange={this.dateOnChangeHandler}
@@ -41,7 +51,9 @@ class LabeledInput extends Component{
                     id={this.props.params.id} 
                     name={this.props.params.id}
                     defaultValue={this.props.params.defaultValue}
-                    required={this.props.params.required} />
+                    required={this.props.params.required} 
+                    hidden={this.props.params.hidden}
+                    />
                 }
                 
             </div>
