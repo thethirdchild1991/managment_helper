@@ -18,6 +18,15 @@ const ProjectSchema = new Schema({
 ProjectSchema.plugin(uniqueValidator)
 
 
+const PostSchema = new Schema({
+    postProject :{type: String,     required: true,},
+    postSubject :{type: String,     default: ''},
+    postDate    :{type: Date,       default: Date.now},
+    postAuthor  :{type: String,     required: true,},
+    postText    :{type: String,},
+});
+PostSchema.plugin(uniqueValidator)
+
 const ROLES = ['employee', 'developer', 'manager', 'admin'];
 const UserSchema = new Schema({
     username    : {type: String, default: 'username',   unique : true},
@@ -30,9 +39,18 @@ UserSchema.plugin(uniqueValidator);
 
 const ProjectModel = mongoose.model('Project', ProjectSchema);
 const UserModel = mongoose.model('User', UserSchema);
+const PostsModel = mongoose.model('Posts', PostSchema);
+
+authCheck = (req,res,next) => {
+    // console.log(req.body)
+    next()
+}
 
 module.exports.project =  ProjectModel;
 module.exports.user =  UserModel;
+module.exports.post = PostsModel;
+module.exports.authMiddleware =  authCheck;
 module.exports.ProjectModel =  ProjectModel;
 module.exports.UserModel =  UserModel;
+module.exports.PostSchema = PostSchema;
 

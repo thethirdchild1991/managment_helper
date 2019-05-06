@@ -2,10 +2,30 @@ const express   = require('express')
 const router    = express.Router();
 const Models    = require('./db')
 
+router.use(Models.authMiddleware);
+
+router.get('/select/posts', (req,res,next) => {
+    const id = req.query['id']
+
+    Models.post.find(
+        {postProject: id}, 
+        (err,docs) => {
+            if(err){
+                console.log('Errors: ', err)
+                res.status('404')
+            }else{
+                res.send(docs)
+            }
+
+        })
+
+})
+
 router.get('/:action/:target', (req, res, next) =>{    
     const action = req.params.action
     const target = req.params.target
     const id = req.query['id']
+    
     
     if( id ){    
         Models[target].findById(req.query['id'],(err, doc) => {                    
@@ -20,7 +40,6 @@ router.get('/:action/:target', (req, res, next) =>{
             }
         })   
     } 
-
 });
 
 
@@ -37,7 +56,7 @@ router.post('/signin', (req, res, next) => {
         (err, docs) => {
             if(err){
                 console.log('error: ', err)
-            }else{
+            }else{                
                 if(docs.length === 1){                    
                     res.json({loggedIn : docs[0].role,})                    
                 }else{
@@ -65,7 +84,8 @@ router.post('/signup', (req, res, next) => {
 })
 
 router.post('/:action/:target', (req, res, next) => {        
-    const target = req.params.target    
+    const target = req.params.target  
+    console.log(req.body)  
 
     const newTarget = new Models[target](req.body)
     newTarget.save((error, product) => {
@@ -84,8 +104,7 @@ router.post('/:action/:target', (req, res, next) => {
 router.put('/:action/:target', (req, res, next) => {    
     const action = req.params.action
     const target = req.params.target
-    const id = req.body.id 
-    console.log(req.body)       
+    const id = req.body.id         
 
     if( action === 'update'){        
         Models[target].findByIdAndUpdate(
